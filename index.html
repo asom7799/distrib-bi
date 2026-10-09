@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Power BI отчёты для дистрибьюторов: SmartUp, Linko, Sales Doctor, 1С. Демо, пакеты и цены.">
+<meta property="og:title" content="Distrib BI — Power BI для дистрибьюторов">
+<meta property="og:description" content="Продажи, план-факт, агенты, клиенты, склад и дебиторка каждое утро. От 1 000 $.">
+<meta property="og:image" content="https://asom7799.github.io/distrib-bi/img/01-obzor.png">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Distrib BI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: one reading column; hero = thesis + the real report screenshot; gallery of reports; packages; process; contact */
+:root{
+  --bg:#f5f6f8; --paper:#ffffff; --ink:#17202e; --muted:#5a6475; --line:#dde1e8;
+  --accent:#d98a0b; --accent-ink:#ffffff; --deep:#1d3557; --chip:#eef1f6;
+  --f-display:"Unbounded","Golos Text",system-ui,sans-serif;
+  --f-body:"Golos Text",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#10151d; --paper:#171e29; --ink:#e7ebf1; --muted:#9aa5b5; --line:#2a3443;
+  --accent:#f0a830; --accent-ink:#15110a; --deep:#9cc0ec; --chip:#1f2835; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#10151d; --paper:#171e29; --ink:#e7ebf1; --muted:#9aa5b5; --line:#2a3443;
+  --accent:#f0a830; --accent-ink:#15110a; --deep:#9cc0ec; --chip:#1f2835; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--f-body);padding:0 16px}
+.wrap{max-width:1040px;margin:0 auto;padding-block:40px 64px;display:grid;gap:72px}
+h1,h2{font-family:var(--f-display);font-weight:700;line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:clamp(28px,5vw,46px);letter-spacing:-.01em}
+h2{font-size:clamp(22px,3.2vw,30px)}
+p{margin:0}
+.eyebrow{font:500 12px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.lead{font-size:clamp(17px,2.2vw,20px);color:var(--muted);max-width:62ch}
+section{display:grid;gap:24px;min-width:0}
+
+/* hero */
+.hero{display:grid;gap:28px}
+.hero-text{display:grid;gap:18px}
+.srcs{display:flex;flex-wrap:wrap;gap:8px}
+.srcs span{font:500 13px/1 var(--f-mono);padding:8px 12px;border-radius:999px;background:var(--chip);color:var(--deep)}
+.cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 20px;border-radius:10px;font:600 15px/1 var(--f-body);text-decoration:none;border:1px solid transparent;cursor:pointer}
+.btn-main{background:var(--accent);color:var(--accent-ink)}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn:focus-visible,.shot:focus-visible{outline:3px solid var(--deep);outline-offset:2px}
+.hero-shot{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--paper);box-shadow:0 18px 50px -24px rgba(20,30,50,.45)}
+.hero-shot img{display:block;width:100%;height:auto}
+.note{font-size:13px;color:var(--muted)}
+
+/* morning numbers */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.kpi{background:var(--paper);padding:16px 18px;display:grid;gap:4px}
+.kpi b{font:500 22px/1.1 var(--f-mono);font-variant-numeric:tabular-nums}
+.kpi span{font-size:13px;color:var(--muted)}
+
+/* gallery */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.shot{all:unset;display:grid;gap:10px;cursor:zoom-in;min-width:0}
+.shot img{width:100%;aspect-ratio:16/9;object-fit:cover;object-position:top;border-radius:10px;border:1px solid var(--line);background:var(--paper);transition:transform .2s}
+.shot:hover img{transform:translateY(-2px)}
+.shot strong{font-weight:600}
+.shot small{font-size:14px;color:var(--muted);line-height:1.45}
+.all-pages{display:flex;flex-wrap:wrap;gap:6px}
+.all-pages span{font-size:13px;padding:5px 10px;border:1px solid var(--line);border-radius:6px;color:var(--muted)}
+
+/* packages */
+.packs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.pack{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:24px;display:grid;gap:14px;align-content:start}
+.pack.hot{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.pack h3{margin:0;font:600 18px/1.2 var(--f-body)}
+.price{font:500 30px/1 var(--f-mono);font-variant-numeric:tabular-nums}
+.price small{font-size:14px;color:var(--muted)}
+.meta{font:500 13px/1.3 var(--f-mono);color:var(--deep)}
+.pack ul{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--muted);font-size:15px}
+.terms{color:var(--muted);font-size:15px;max-width:70ch}
+
+/* process */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;counter-reset:s}
+.steps li{counter-increment:s;display:grid;gap:6px;padding-top:14px;border-top:2px solid var(--line)}
+.steps li::before{content:counter(s);font:500 13px/1 var(--f-mono);color:var(--accent)}
+.steps b{font-weight:600}
+.steps span{font-size:15px;color:var(--muted)}
+
+/* about + contact */
+.about{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px;align-items:start}
+.about ul{margin:0;padding-left:18px;display:grid;gap:8px;color:var(--muted)}
+.contact{background:var(--deep);color:var(--bg);border-radius:16px;padding:28px;display:grid;gap:16px}
+.contact h2{color:inherit}
+.contact .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font:500 18px/1.2 var(--f-mono)}
+.contact .row a{color:inherit}
+.copy{font:500 13px/1 var(--f-body);padding:7px 10px;border-radius:6px;border:1px solid currentColor;background:transparent;color:inherit;cursor:pointer;opacity:.85}
+.contact p{opacity:.85}
+
+/* viewer */
+dialog{padding:0;border:0;background:transparent;max-width:96vw;max-height:94vh}
+dialog::backdrop{background:rgba(8,12,18,.82)}
+dialog img{display:block;max-width:96vw;max-height:88vh;border-radius:8px}
+dialog p{color:#e7ebf1;text-align:center;padding-top:8px;font-size:14px}
+
+@media (prefers-reduced-motion:reduce){.shot img{transition:none}}
+</style>
+</head><body>
+
+<main class="wrap">
+
+  <header class="hero">
+    <div class="hero-text">
+      <p class="eyebrow">Power BI для дистрибьюторов · Узбекистан</p>
+      <h1>Руководитель открывает отчёт в 8:00, а цифры за вчера уже там</h1>
+      <p class="lead">Подключаю вашу учётную систему к Power BI. Данные загружаются каждое утро сами: продажи, план-факт, агенты, визиты, клиенты, склад и дебиторка. Без выгрузок в Excel и ручных сводок.</p>
+      <div class="srcs" aria-label="Системы"><span>SmartUp</span><span>Linko</span><span>Sales Doctor</span><span>1С</span><span>Excel / CSV</span></div>
+      <div class="cta">
+        <a class="btn btn-main" href="https://t.me/sabrvaxarakat">Написать в Telegram</a>
+        <a class="btn btn-ghost" href="#reports">Смотреть 19 отчётов</a>
+      </div>
+    </div>
+    <figure class="hero-shot"><img src="img/01-obzor.png" alt="Отчёт «Обзор»: продажи, выполнение плана, рост к прошлому году, АКБ, средний чек"></figure>
+    <p class="note">Все скриншоты сделаны на демо-данных вымышленной компании. На встрече покажу на ваших.</p>
+  </header>
+
+  <section aria-labelledby="h-morning">
+    <h2 id="h-morning">Что видно на первом экране</h2>
+    <div class="kpis">
+      <div class="kpi"><b>19,0 млрд</b><span>продажи с начала года</span></div>
+      <div class="kpi"><b>89,2%</b><span>выполнение плана</span></div>
+      <div class="kpi"><b>+32,5%</b><span>к тому же периоду прошлого года</span></div>
+      <div class="kpi"><b>474</b><span>АКБ, активные точки</span></div>
+      <div class="kpi"><b>44,9%</b><span>визитов закончились заказом</span></div>
+    </div>
+    <p class="note">Цифры из демо-отчёта, сум.</p>
+  </section>
+
+  <section id="reports" aria-labelledby="h-reports">
+    <h2 id="h-reports">Отчёты, которые получает руководитель</h2>
+    <div class="grid" id="gallery"></div>
+    <p class="terms">Полный набор, 19 страниц в одном файле Power BI:</p>
+    <div class="all-pages">
+      <span>Содержание</span><span>Обзор</span><span>Ежедневный контроль</span><span>Динамика к прошлому году</span><span>Филиалы</span><span>Агенты</span><span>Визиты</span><span>Клиенты</span><span>Воронка покрытия</span><span>Новые и ушедшие</span><span>RFM-сегменты</span><span>ABC-анализ</span><span>Дистрибуция SKU</span><span>Цены и скидки</span><span>Возвраты</span><span>Склад</span><span>Дебиторка</span><span>Карта клиентов</span><span>Анализ причин</span>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-packs">
+    <h2 id="h-packs">Пакеты и цены</h2>
+    <p class="terms">Одна фиксированная цена за проект. Абонентской платы нет, отчёты и обновление остаются вашими.</p>
+    <div class="packs">
+      <article class="pack">
+        <h3>Старт</h3>
+        <p class="price">1 000 <small>USD</small></p>
+        <p class="meta">2–3 недели · 1 система</p>
+        <ul><li>Продажи и план-факт</li><li>Агенты, клиенты, АКБ</li><li>Ежедневное автообновление</li><li>Обучение 1 час</li></ul>
+      </article>
+      <article class="pack hot">
+        <h3>Бизнес</h3>
+        <p class="price">2 000 <small>USD</small></p>
+        <p class="meta">4–6 недель · до 2 систем</p>
+        <ul><li>Всё из «Старт»</li><li>Остатки, дебиторка, возвраты, визиты</li><li>Доступ по ролям: агент видит своё</li><li>Обучение команды</li></ul>
+      </article>
+      <article class="pack">
+        <h3>Под ключ</h3>
+        <p class="price">от 3 500 <small>USD</small></p>
+        <p class="meta">срок после аудита · 3+ системы</p>
+        <ul><li>Несколько систем, включая 1С</li><li>Единое хранилище данных</li><li>Отчёты под ваши задачи</li><li>Документация</li></ul>
+      </article>
+    </div>
+    <p class="terms">Во все пакеты входит 30 дней бесплатных исправлений после сдачи. Оплата: 50% предоплата, 50% после приёмки. Лицензии Power BI оплачиваются отдельно по тарифам Microsoft.</p>
+  </section>
+
+  <section aria-labelledby="h-steps">
+    <h2 id="h-steps">Как проходит проект</h2>
+    <ol class="steps">
+      <li><b>Аудит</b><span>Бесплатно, 30–60 минут. Смотрим ваши системы и нужные цифры.</span></li>
+      <li><b>Подключение</b><span>Загрузка данных в вашу базу SQL Server и ежедневное обновление.</span></li>
+      <li><b>Первая версия</b><span>Показываю отчёт на ваших данных, собираю замечания.</span></li>
+      <li><b>Сверка</b><span>Цифры отчёта сверяются с учётной системой.</span></li>
+      <li><b>Сдача</b><span>Передаю доступы, обучаю команду, 30 дней поддержки.</span></li>
+    </ol>
+  </section>
+
+  <section class="about" aria-labelledby="h-about">
+    <div style="display:grid;gap:16px;min-width:0">
+      <h2 id="h-about">Кто делает</h2>
+      <p>Асомиддин Низамов, BI-аналитик. Более 9 лет в аналитике дистрибуции и продаж.</p>
+      <ul>
+        <li>В дистрибуционной компании с нуля построил аналитику: SmartUp и Linko → SQL Server → Power BI, более 200 показателей.</li>
+        <li>В Pepsi вёл отчётность по продажам, визитам, АКБ/ОКБ и плану по территориям, сверки с бухгалтерией, 1С 8.3.</li>
+      </ul>
+    </div>
+    <div class="contact">
+      <h2>Бесплатный аудит</h2>
+      <p>Напишите, какую систему вы используете, и договоримся о встрече.</p>
+      <div class="row"><a href="https://t.me/sabrvaxarakat">@sabrvaxarakat</a><button class="copy" data-copy="@sabrvaxarakat" type="button">Копировать</button></div>
+      <div class="row"><span>+998 99 000-86-89</span><button class="copy" data-copy="+998990008689" type="button">Копировать</button></div>
+    </div>
+  </section>
+
+</main>
+
+<dialog id="viewer"><img alt=""><p></p></dialog>
+
+<script>
+const shots=[
+ ["img/02-kontrol.png","Ежедневный контроль","Факт месяца, прогноз до конца месяца и сколько нужно продавать в день, по каждому агенту."],
+ ["img/05-agenty.png","Агенты","Выполнение плана, АКБ, заказы и средний чек каждого агента."],
+ ["img/03-dinamika.png","Динамика к прошлому году","Рост с начала года по месяцам и какие бренды дали прирост."],
+ ["img/08-voronka.png","Воронка покрытия","Все клиенты → посещены → купили. Где теряются точки."],
+ ["img/10-rfm.png","RFM-сегменты","VIP, лояльные, под угрозой, потерянные. Кому звонить сегодня."],
+ ["img/12-distribuciya.png","Дистрибуция SKU","Доля точек, которые покупают каждый бренд и товар."],
+ ["img/16-debitorka.png","Дебиторка","Долги клиентов по давности последней оплаты."],
+ ["img/17-karta.png","Карта клиентов","Торговые точки по координатам, размер = продажи."],
+ ["img/18-prichiny.png","Анализ причин","Продажи по филиалам, каналам, брендам и агентам в одном дереве."]
+];
+const g=document.getElementById('gallery'),dlg=document.getElementById('viewer');
+for(const [src,t,d] of shots){
+  const b=document.createElement('button');b.className='shot';b.type='button';
+  b.innerHTML=`<img src="${src}" alt="Отчёт «${t}»" loading="lazy"><strong>${t}</strong><small>${d}</small>`;
+  b.onclick=()=>{dlg.querySelector('img').src=src;dlg.querySelector('img').alt=t;dlg.querySelector('p').textContent=t;dlg.showModal()};
+  g.append(b);
+}
+document.querySelector('.hero-shot img').style.cursor='zoom-in';
+document.querySelector('.hero-shot img').onclick=e=>{dlg.querySelector('img').src=e.target.src;dlg.querySelector('p').textContent='Обзор';dlg.showModal()};
+dlg.onclick=()=>dlg.close();
+document.querySelectorAll('.copy').forEach(b=>b.onclick=async()=>{
+  try{await navigator.clipboard.writeText(b.dataset.copy);b.textContent='Скопировано'}
+  catch{const r=document.createRange();r.selectNodeContents(b.previousElementSibling);getSelection().removeAllRanges();getSelection().addRange(r)}
+});
+</script>
+</body></html>
