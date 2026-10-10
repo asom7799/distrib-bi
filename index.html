@@ -9,6 +9,7 @@
 <meta property="og:image" content="https://asom7799.github.io/distrib-bi/img/01-obzor.png">
 <style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Distrib BI</title>
+<script>document.documentElement.classList.add('js')</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
 <style>
@@ -102,7 +103,16 @@ dialog::backdrop{background:rgba(8,12,18,.82)}
 dialog img{display:block;max-width:96vw;max-height:88vh;border-radius:8px}
 dialog p{color:#e7ebf1;text-align:center;padding-top:8px;font-size:14px}
 
-@media (prefers-reduced-motion:reduce){.shot img{transition:none}}
+
+/* scroll effects: 1) staggered reveal, 2) KPI count-up (JS), 3) hero screenshot straightens on scroll */
+.js .rv{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--i,0)*90ms)}
+.js .rv.in{opacity:1;transform:none}
+@supports (animation-timeline:scroll()){
+  .hero{perspective:1200px}
+  .hero-shot{transform-origin:50% 0;animation:tilt linear both;animation-timeline:scroll();animation-range:0 55vh}
+  @keyframes tilt{from{transform:rotateX(22deg) scale(.9);opacity:.75}to{transform:none;opacity:1}}
+}
+@media (prefers-reduced-motion:reduce){.shot img{transition:none}.js .rv{opacity:1;transform:none;transition:none}.hero-shot{animation:none}}
 </style>
 </head><body>
 
@@ -228,5 +238,19 @@ document.querySelectorAll('.copy').forEach(b=>b.onclick=async()=>{
   try{await navigator.clipboard.writeText(b.dataset.copy);b.textContent='Скопировано'}
   catch{const r=document.createRange();r.selectNodeContents(b.previousElementSibling);getSelection().removeAllRanges();getSelection().addRange(r)}
 });
+const still=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function countUp(b){
+  const m=b.textContent.match(/\d[\d,]*/);if(!m||still)return;
+  const [pre,post]=[b.textContent.slice(0,m.index),b.textContent.slice(m.index+m[0].length)];
+  const dec=(m[0].split(',')[1]||'').length,end=parseFloat(m[0].replace(',','.')),t0=performance.now();
+  const step=t=>{const k=Math.min((t-t0)/1200,1),v=end*(1-(1-k)**3);
+    b.textContent=pre+v.toFixed(dec).replace('.',',')+post;if(k<1)requestAnimationFrame(step)};
+  requestAnimationFrame(step);
+}
+const show=el=>{if(el.classList.contains('in'))return;el.classList.add('in');el.classList.contains('kpi')&&countUp(el.querySelector('b'))};
+const rv=[...document.querySelectorAll('section h2, section > .terms, section > .note, .kpi, .shot, .all-pages, .pack, .steps li, .about > div')];
+// anchor jumps skip elements without intersecting them, so reveal everything above the one that came into view
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)rv.slice(0,rv.indexOf(e.target)+1).forEach(show)}),{threshold:.15});
+rv.forEach(el=>{el.classList.add('rv');el.style.setProperty('--i',Math.min([...el.parentNode.children].indexOf(el),6));io.observe(el)});
 </script>
 </body></html>
