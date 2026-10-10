@@ -188,6 +188,20 @@ section > h2::before,.about > div:first-child > h2::before{counter-increment:sec
 .contact{background:linear-gradient(120deg,var(--deep),color-mix(in srgb,var(--deep) 65%,var(--accent)),var(--deep)) 0 0/250% 250%;animation:flow 9s ease-in-out infinite alternate}
 @keyframes flow{to{background-position:100% 100%}}
 
+/* language switch */
+.lang{position:fixed;top:12px;right:12px;z-index:11;display:flex;gap:2px;padding:3px;border-radius:999px;border:1px solid var(--line);background:color-mix(in srgb,var(--paper) 78%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.lang button{all:unset;cursor:pointer;font:500 12px/1 var(--f-mono);letter-spacing:.08em;padding:9px 12px;border-radius:999px;color:var(--muted);transition:background .3s,color .3s}
+.lang button:hover{color:var(--ink)}
+.lang button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.lang button:focus-visible{outline:2px solid var(--deep);outline-offset:1px}
+.js .lang{opacity:0;translate:0 -12px;transition:opacity .6s .4s,translate .6s .4s}
+.ready .lang{opacity:1;translate:none}
+@media (max-width:600px){.wrap{padding-top:68px}}
+/* replay after a language switch: no intro delays */
+.relang.js .split .c{transition-delay:calc(var(--n)*18ms)}
+.relang.js .words .c{transition-delay:calc(.2s + var(--n)*14ms)}
+.relang .hl::before{transition-delay:.8s}
+
 @media (prefers-reduced-motion:reduce){
   .shot img{transition:none}
   .js .rv,.js .rv img,.js .split .c,.js .mask .c,.js .words .c,.js .srcs span,.js .cta .btn,.js .hero-shot,.js .hero .eyebrow{opacity:1!important;transform:none!important;filter:none!important;clip-path:none!important;translate:none!important;transition:none!important}
@@ -197,6 +211,7 @@ section > h2::before,.about > div:first-child > h2::before{counter-increment:sec
 </style>
 </head><body>
 
+<nav class="lang" aria-label="Til / Язык / Language"><button type="button" data-lang="uz" lang="uz">UZ</button><button type="button" data-lang="ru" lang="ru">RU</button><button type="button" data-lang="en" lang="en">EN</button></nav>
 <div class="prog" aria-hidden="true"></div>
 <div class="bg" aria-hidden="true"><i></i><i></i><i></i></div>
 
@@ -204,94 +219,94 @@ section > h2::before,.about > div:first-child > h2::before{counter-increment:sec
 
   <header class="hero">
     <div class="hero-text">
-      <p class="eyebrow">Power BI для дистрибьюторов · Узбекистан</p>
-      <h1>Руководитель открывает отчёт в 8:00, а цифры за вчера уже там</h1>
-      <p class="lead">Подключаю вашу учётную систему к Power BI. Данные загружаются каждое утро сами: продажи, план-факт, агенты, визиты, клиенты, склад и дебиторка. Без выгрузок в Excel и ручных сводок.</p>
-      <div class="srcs" aria-label="Системы"><span>SmartUp</span><span>Linko</span><span>Sales Doctor</span><span>1С</span><span>Excel / CSV</span></div>
+      <p class="eyebrow" data-t="eyebrow">Power BI для дистрибьюторов · Узбекистан</p>
+      <h1 data-t="h1">Руководитель открывает отчёт в 8:00, а цифры за вчера уже там</h1>
+      <p class="lead" data-t="lead">Подключаю вашу учётную систему к Power BI. Данные загружаются каждое утро сами: продажи, план-факт, агенты, визиты, клиенты, склад и дебиторка. Без выгрузок в Excel и ручных сводок.</p>
+      <div class="srcs" aria-label="Системы"><span>SmartUp</span><span>Linko</span><span>Sales Doctor</span><span>1C</span><span>Excel / CSV</span></div>
       <div class="cta">
-        <a class="btn btn-main" href="https://t.me/sabrvaxarakat">Написать в Telegram</a>
-        <a class="btn btn-ghost" href="#reports">Смотреть 19 отчётов</a>
+        <a class="btn btn-main" href="https://t.me/sabrvaxarakat" data-t="cta1">Написать в Telegram</a>
+        <a class="btn btn-ghost" href="#reports" data-t="cta2">Смотреть 19 отчётов</a>
       </div>
     </div>
-    <figure class="hero-shot"><img src="img/01-obzor.png" alt="Отчёт «Обзор»: продажи, выполнение плана, рост к прошлому году, АКБ, средний чек"></figure>
-    <p class="note">Все скриншоты сделаны на демо-данных вымышленной компании. На встрече покажу на ваших.</p>
+    <figure class="hero-shot"><img src="img/01-obzor.png" data-ta="heroAlt" alt="Отчёт «Обзор»: продажи, выполнение плана, рост к прошлому году, АКБ, средний чек"></figure>
+    <p class="note" data-t="note1">Все скриншоты сделаны на демо-данных вымышленной компании. На встрече покажу на ваших.</p>
   </header>
 
   <div class="marquee" aria-hidden="true">
-    <div class="band"><div class="track"><span>Продажи</span><span>План-факт</span><span>АКБ</span><span>Агенты</span><span>Визиты</span><span>Дебиторка</span><span>Склад</span><span>RFM</span><span>ABC</span><span>Возвраты</span></div></div>
-    <div class="outline"><div class="track"><span>SmartUp</span><span>Linko</span><span>Sales Doctor</span><span>1С</span><span>SQL Server</span><span>Power BI</span></div></div>
+    <div class="band"><div class="track" data-t="band"><span>Продажи</span><span>План-факт</span><span>АКБ</span><span>Агенты</span><span>Визиты</span><span>Дебиторка</span><span>Склад</span><span>RFM</span><span>ABC</span><span>Возвраты</span></div></div>
+    <div class="outline"><div class="track"><span>SmartUp</span><span>Linko</span><span>Sales Doctor</span><span>1C</span><span>SQL Server</span><span>Power BI</span></div></div>
   </div>
 
   <section aria-labelledby="h-morning">
-    <h2 id="h-morning">Что видно на первом экране</h2>
+    <h2 id="h-morning" data-t="hMorning">Что видно на первом экране</h2>
     <div class="kpis">
-      <div class="kpi"><b>19,0 млрд</b><span>продажи с начала года</span></div>
-      <div class="kpi"><b>89,2%</b><span>выполнение плана</span></div>
-      <div class="kpi"><b>+32,5%</b><span>к тому же периоду прошлого года</span></div>
-      <div class="kpi"><b>474</b><span>АКБ, активные точки</span></div>
-      <div class="kpi"><b>44,9%</b><span>визитов закончились заказом</span></div>
+      <div class="kpi"><b data-t="kv1">19,0 млрд</b><span data-t="kl1">продажи с начала года</span></div>
+      <div class="kpi"><b data-t="kv2">89,2%</b><span data-t="kl2">выполнение плана</span></div>
+      <div class="kpi"><b data-t="kv3">+32,5%</b><span data-t="kl3">к тому же периоду прошлого года</span></div>
+      <div class="kpi"><b data-t="kv4">474</b><span data-t="kl4">АКБ, активные точки</span></div>
+      <div class="kpi"><b data-t="kv5">44,9%</b><span data-t="kl5">визитов закончились заказом</span></div>
     </div>
-    <p class="note">Цифры из демо-отчёта, сум.</p>
+    <p class="note" data-t="note2">Цифры из демо-отчёта, сум.</p>
   </section>
 
   <section id="reports" aria-labelledby="h-reports">
-    <h2 id="h-reports">Отчёты, которые получает руководитель</h2>
+    <h2 id="h-reports" data-t="hReports">Отчёты, которые получает руководитель</h2>
     <div class="grid" id="gallery"></div>
-    <p class="terms">Полный набор, 19 страниц в одном файле Power BI:</p>
-    <div class="all-pages">
+    <p class="terms" data-t="fullSet">Полный набор, 19 страниц в одном файле Power BI:</p>
+    <div class="all-pages" data-t="pages">
       <span>Содержание</span><span>Обзор</span><span>Ежедневный контроль</span><span>Динамика к прошлому году</span><span>Филиалы</span><span>Агенты</span><span>Визиты</span><span>Клиенты</span><span>Воронка покрытия</span><span>Новые и ушедшие</span><span>RFM-сегменты</span><span>ABC-анализ</span><span>Дистрибуция SKU</span><span>Цены и скидки</span><span>Возвраты</span><span>Склад</span><span>Дебиторка</span><span>Карта клиентов</span><span>Анализ причин</span>
     </div>
   </section>
 
   <section aria-labelledby="h-packs">
-    <h2 id="h-packs">Пакеты и цены</h2>
-    <p class="terms">Одна фиксированная цена за проект. Абонентской платы нет, отчёты и обновление остаются вашими.</p>
+    <h2 id="h-packs" data-t="hPacks">Пакеты и цены</h2>
+    <p class="terms" data-t="packsIntro">Одна фиксированная цена за проект. Абонентской платы нет, отчёты и обновление остаются вашими.</p>
     <div class="packs">
       <article class="pack">
-        <h3>Старт</h3>
-        <p class="price">1 000 <small>USD</small></p>
-        <p class="meta">2–3 недели · 1 система</p>
-        <ul><li>Продажи и план-факт</li><li>Агенты, клиенты, АКБ</li><li>Ежедневное автообновление</li><li>Обучение 1 час</li></ul>
+        <h3 data-t="pn1">Старт</h3>
+        <p class="price" data-t="pr1">1 000 <small>USD</small></p>
+        <p class="meta" data-t="pm1">2–3 недели · 1 система</p>
+        <ul data-t="pu1"><li>Продажи и план-факт</li><li>Агенты, клиенты, АКБ</li><li>Ежедневное автообновление</li><li>Обучение 1 час</li></ul>
       </article>
       <article class="pack hot">
-        <h3>Бизнес</h3>
-        <p class="price">2 000 <small>USD</small></p>
-        <p class="meta">4–6 недель · до 2 систем</p>
-        <ul><li>Всё из «Старт»</li><li>Остатки, дебиторка, возвраты, визиты</li><li>Доступ по ролям: агент видит своё</li><li>Обучение команды</li></ul>
+        <h3 data-t="pn2">Бизнес</h3>
+        <p class="price" data-t="pr2">2 000 <small>USD</small></p>
+        <p class="meta" data-t="pm2">4–6 недель · до 2 систем</p>
+        <ul data-t="pu2"><li>Всё из «Старт»</li><li>Остатки, дебиторка, возвраты, визиты</li><li>Доступ по ролям: агент видит своё</li><li>Обучение команды</li></ul>
       </article>
       <article class="pack">
-        <h3>Под ключ</h3>
-        <p class="price">от 3 500 <small>USD</small></p>
-        <p class="meta">срок после аудита · 3+ системы</p>
-        <ul><li>Несколько систем, включая 1С</li><li>Единое хранилище данных</li><li>Отчёты под ваши задачи</li><li>Документация</li></ul>
+        <h3 data-t="pn3">Под ключ</h3>
+        <p class="price" data-t="pr3">от 3 500 <small>USD</small></p>
+        <p class="meta" data-t="pm3">срок после аудита · 3+ системы</p>
+        <ul data-t="pu3"><li>Несколько систем, включая 1С</li><li>Единое хранилище данных</li><li>Отчёты под ваши задачи</li><li>Документация</li></ul>
       </article>
     </div>
-    <p class="terms">Во все пакеты входит 30 дней бесплатных исправлений после сдачи. Оплата: 50% предоплата, 50% после приёмки. Лицензии Power BI оплачиваются отдельно по тарифам Microsoft.</p>
+    <p class="terms" data-t="packsTerms">Во все пакеты входит 30 дней бесплатных исправлений после сдачи. Оплата: 50% предоплата, 50% после приёмки. Лицензии Power BI оплачиваются отдельно по тарифам Microsoft.</p>
   </section>
 
   <section aria-labelledby="h-steps">
-    <h2 id="h-steps">Как проходит проект</h2>
+    <h2 id="h-steps" data-t="hSteps">Как проходит проект</h2>
     <ol class="steps">
-      <li><b>Аудит</b><span>Бесплатно, 30–60 минут. Смотрим ваши системы и нужные цифры.</span></li>
-      <li><b>Подключение</b><span>Загрузка данных в вашу базу SQL Server и ежедневное обновление.</span></li>
-      <li><b>Первая версия</b><span>Показываю отчёт на ваших данных, собираю замечания.</span></li>
-      <li><b>Сверка</b><span>Цифры отчёта сверяются с учётной системой.</span></li>
-      <li><b>Сдача</b><span>Передаю доступы, обучаю команду, 30 дней поддержки.</span></li>
+      <li data-t="st1"><b>Аудит</b><span>Бесплатно, 30–60 минут. Смотрим ваши системы и нужные цифры.</span></li>
+      <li data-t="st2"><b>Подключение</b><span>Загрузка данных в вашу базу SQL Server и ежедневное обновление.</span></li>
+      <li data-t="st3"><b>Первая версия</b><span>Показываю отчёт на ваших данных, собираю замечания.</span></li>
+      <li data-t="st4"><b>Сверка</b><span>Цифры отчёта сверяются с учётной системой.</span></li>
+      <li data-t="st5"><b>Сдача</b><span>Передаю доступы, обучаю команду, 30 дней поддержки.</span></li>
     </ol>
   </section>
 
   <section class="about" aria-labelledby="h-about">
     <div style="display:grid;gap:16px;min-width:0">
-      <h2 id="h-about">Кто делает</h2>
-      <p>Асомиддин Низамов, BI-аналитик. Более 9 лет в аналитике дистрибуции и продаж.</p>
-      <ul>
+      <h2 id="h-about" data-t="hAbout">Кто делает</h2>
+      <p data-t="aboutP">Асомиддин Низамов, BI-аналитик. Более 9 лет в аналитике дистрибуции и продаж.</p>
+      <ul data-t="aboutUl">
         <li>В дистрибуционной компании с нуля построил аналитику: SmartUp и Linko → SQL Server → Power BI, более 200 показателей.</li>
         <li>В Pepsi вёл отчётность по продажам, визитам, АКБ/ОКБ и плану по территориям, сверки с бухгалтерией, 1С 8.3.</li>
       </ul>
     </div>
     <div class="contact">
-      <h2>Бесплатный аудит</h2>
-      <p>Напишите, какую систему вы используете, и договоримся о встрече.</p>
+      <h2 data-t="hAudit">Бесплатный аудит</h2>
+      <p data-t="auditP">Напишите, какую систему вы используете, и договоримся о встрече.</p>
       <div class="row"><a href="https://t.me/sabrvaxarakat">@sabrvaxarakat</a><button class="copy" data-copy="@sabrvaxarakat" type="button">Копировать</button></div>
       <div class="row"><span>+998 99 000-86-89</span><button class="copy" data-copy="+998990008689" type="button">Копировать</button></div>
     </div>
@@ -303,28 +318,125 @@ section > h2::before,.about > div:first-child > h2::before{counter-increment:sec
 
 <script>
 const shots=[
- ["img/02-kontrol.png","Ежедневный контроль","Факт месяца, прогноз до конца месяца и сколько нужно продавать в день, по каждому агенту."],
- ["img/05-agenty.png","Агенты","Выполнение плана, АКБ, заказы и средний чек каждого агента."],
- ["img/03-dinamika.png","Динамика к прошлому году","Рост с начала года по месяцам и какие бренды дали прирост."],
- ["img/08-voronka.png","Воронка покрытия","Все клиенты → посещены → купили. Где теряются точки."],
- ["img/10-rfm.png","RFM-сегменты","VIP, лояльные, под угрозой, потерянные. Кому звонить сегодня."],
- ["img/12-distribuciya.png","Дистрибуция SKU","Доля точек, которые покупают каждый бренд и товар."],
- ["img/16-debitorka.png","Дебиторка","Долги клиентов по давности последней оплаты."],
- ["img/17-karta.png","Карта клиентов","Торговые точки по координатам, размер = продажи."],
- ["img/18-prichiny.png","Анализ причин","Продажи по филиалам, каналам, брендам и агентам в одном дереве."]
+ ["img/02-kontrol.png",{ru:["Ежедневный контроль","Факт месяца, прогноз до конца месяца и сколько нужно продавать в день, по каждому агенту."],uz:["Kunlik nazorat","Oy fakti, oy oxirigacha prognoz va har bir agent kuniga qancha sotishi kerakligi."],en:["Daily control","Month-to-date actuals, month-end forecast and the daily sales needed, per agent."]}],
+ ["img/05-agenty.png",{ru:["Агенты","Выполнение плана, АКБ, заказы и средний чек каждого агента."],uz:["Agentlar","Har bir agentning reja bajarilishi, AKB, buyurtmalari va oʻrtacha cheki."],en:["Agents","Plan completion, active outlets, orders and average order for every agent."]}],
+ ["img/03-dinamika.png",{ru:["Динамика к прошлому году","Рост с начала года по месяцам и какие бренды дали прирост."],uz:["Oʻtgan yilga nisbatan dinamika","Yil boshidan oylar boʻyicha oʻsish va qaysi brendlar oʻsish berdi."],en:["Year-over-year trend","Growth by month since January and which brands drove it."]}],
+ ["img/08-voronka.png",{ru:["Воронка покрытия","Все клиенты → посещены → купили. Где теряются точки."],uz:["Qamrov voronkasi","Barcha mijozlar → tashrif qilingan → xarid qilgan. Nuqtalar qayerda yoʻqoladi."],en:["Coverage funnel","All customers → visited → bought. Where outlets drop out."]}],
+ ["img/10-rfm.png",{ru:["RFM-сегменты","VIP, лояльные, под угрозой, потерянные. Кому звонить сегодня."],uz:["RFM segmentlar","VIP, sodiq, xavf ostida, yoʻqotilgan. Bugun kimga qoʻngʻiroq qilish kerak."],en:["RFM segments","VIP, loyal, at risk, lost. Who to call today."]}],
+ ["img/12-distribuciya.png",{ru:["Дистрибуция SKU","Доля точек, которые покупают каждый бренд и товар."],uz:["SKU distributsiyasi","Har bir brend va tovarni xarid qiladigan nuqtalar ulushi."],en:["SKU distribution","Share of outlets buying each brand and product."]}],
+ ["img/16-debitorka.png",{ru:["Дебиторка","Долги клиентов по давности последней оплаты."],uz:["Debitorlik","Mijozlar qarzi oxirgi toʻlovdan beri oʻtgan vaqt boʻyicha."],en:["Receivables","Customer debt by time since the last payment."]}],
+ ["img/17-karta.png",{ru:["Карта клиентов","Торговые точки по координатам, размер = продажи."],uz:["Mijozlar xaritasi","Savdo nuqtalari koordinatalar boʻyicha, oʻlcham = sotuv."],en:["Customer map","Outlets by coordinates, size = sales."]}],
+ ["img/18-prichiny.png",{ru:["Анализ причин","Продажи по филиалам, каналам, брендам и агентам в одном дереве."],uz:["Sabablar tahlili","Filial, kanal, brend va agentlar boʻyicha sotuv bitta daraxtda."],en:["Root cause analysis","Sales by branch, channel, brand and agent in one tree."]}]
 ];
+const L={
+  ru:{copy:'Копировать',copied:'Скопировано',hero:'Обзор',alt:t=>`Отчёт «${t}»`,desc:'Power BI отчёты для дистрибьюторов: SmartUp, Linko, Sales Doctor, 1С. Демо, пакеты и цены.'},
+  uz:{copy:'Nusxalash',copied:'Nusxalandi',hero:'Umumiy koʻrinish',alt:t=>`«${t}» hisoboti`,desc:'Distribyutorlar uchun Power BI hisobotlar: SmartUp, Linko, Sales Doctor, 1C. Demo, paketlar va narxlar.'},
+  en:{copy:'Copy',copied:'Copied',hero:'Overview',alt:t=>`“${t}” report`,desc:'Power BI reports for distributors: SmartUp, Linko, Sales Doctor, 1C. Demo, packages and prices.'}
+};
+const li=a=>a.map(x=>`<li>${x}</li>`).join(''),sp=a=>a.map(x=>`<span>${x}</span>`).join('');
+const step=(b,t)=>`<b>${b}</b><span>${t}</span>`;
+const T={
+ uz:{
+  eyebrow:'Distribyutorlar uchun Power BI · Oʻzbekiston',
+  h1:'Rahbar hisobotni soat 8:00 da ochadi, kechagi raqamlar esa allaqachon tayyor',
+  lead:'Hisob tizimingizni Power BIʼga ulayman. Maʼlumotlar har kuni ertalab oʻzi yuklanadi: sotuv, reja-fakt, agentlar, tashriflar, mijozlar, ombor va debitorlik. Excelʼga qoʻlda yuklash va qoʻlda jamlashsiz.',
+  cta1:'Telegramʼda yozish',cta2:'19 ta hisobotni koʻrish',
+  heroAlt:'«Umumiy koʻrinish» hisoboti: sotuv, reja bajarilishi, oʻtgan yilga nisbatan oʻsish, AKB, oʻrtacha chek',
+  note1:'Barcha skrinshotlar oʻylab topilgan kompaniyaning demo maʼlumotlarida. Uchrashuvda sizning maʼlumotlaringizda koʻrsataman.',
+  band:sp(['Sotuv','Reja-fakt','AKB','Agentlar','Tashriflar','Debitorlik','Ombor','RFM','ABC','Qaytarishlar']),
+  hMorning:'Birinchi ekranda nima koʻrinadi',
+  kv1:'19,0 mlrd',kl1:'yil boshidan beri sotuv',kl2:'reja bajarilishi',kl3:'oʻtgan yilning shu davriga nisbatan',kl4:'AKB, faol savdo nuqtalari',kl5:'tashriflar buyurtma bilan yakunlangan',
+  note2:'Raqamlar demo hisobotdan, soʻmda.',
+  hReports:'Rahbar oladigan hisobotlar',
+  fullSet:'Toʻliq toʻplam, bitta Power BI faylida 19 sahifa:',
+  pages:sp(['Mundarija','Umumiy koʻrinish','Kunlik nazorat','Oʻtgan yilga nisbatan dinamika','Filiallar','Agentlar','Tashriflar','Mijozlar','Qamrov voronkasi','Yangi va ketgan mijozlar','RFM segmentlar','ABC tahlil','SKU distributsiyasi','Narxlar va chegirmalar','Qaytarishlar','Ombor','Debitorlik','Mijozlar xaritasi','Sabablar tahlili']),
+  hPacks:'Paketlar va narxlar',
+  packsIntro:'Loyiha uchun bitta qatʼiy narx. Oylik toʻlov yoʻq, hisobotlar va yangilanish sizda qoladi.',
+  pn1:'Start',pn2:'Biznes',pn3:'Toʻliq yechim',
+  pr3:'3 500 <small>USD dan</small>',
+  pm1:'2–3 hafta · 1 tizim',pm2:'4–6 hafta · 2 tagacha tizim',pm3:'muddat auditdan keyin · 3+ tizim',
+  pu1:li(['Sotuv va reja-fakt','Agentlar, mijozlar, AKB','Har kuni avtomatik yangilanish','1 soatlik oʻqitish']),
+  pu2:li(['«Start»dagi hammasi','Qoldiqlar, debitorlik, qaytarishlar, tashriflar','Rollar boʻyicha kirish: agent faqat oʻzinikini koʻradi','Jamoani oʻqitish']),
+  pu3:li(['Bir nechta tizim, 1C ham','Yagona maʼlumotlar ombori','Vazifalaringizga mos hisobotlar','Hujjatlashtirish']),
+  packsTerms:'Barcha paketlarga topshirilgandan keyin 30 kun bepul tuzatishlar kiradi. Toʻlov: 50% oldindan, 50% qabul qilingandan keyin. Power BI litsenziyalari Microsoft tariflari boʻyicha alohida toʻlanadi.',
+  hSteps:'Loyiha qanday oʻtadi',
+  st1:step('Audit','Bepul, 30–60 daqiqa. Tizimlaringiz va kerakli raqamlarni koʻrib chiqamiz.'),
+  st2:step('Ulash','Maʼlumotlarni SQL Server bazangizga yuklash va har kuni yangilash.'),
+  st3:step('Birinchi versiya','Hisobotni sizning maʼlumotlaringizda koʻrsataman, izohlarni yigʻaman.'),
+  st4:step('Solishtirish','Hisobot raqamlari hisob tizimi bilan solishtiriladi.'),
+  st5:step('Topshirish','Kirish huquqlarini beraman, jamoani oʻqitaman, 30 kun qoʻllab-quvvatlayman.'),
+  hAbout:'Kim qiladi',
+  aboutP:'Asomiddin Nizamov, BI-tahlilchi. Distributsiya va savdo tahlilida 9 yildan ortiq tajriba.',
+  aboutUl:li(['Distributsiya kompaniyasida tahlilni noldan qurdim: SmartUp va Linko → SQL Server → Power BI, 200 dan ortiq koʻrsatkich.','Pepsiʼda hududlar boʻyicha sotuv, tashriflar, AKB/OKB va reja hisobotlarini yuritdim, buxgalteriya bilan solishtirdim, 1C 8.3.']),
+  hAudit:'Bepul audit',
+  auditP:'Qaysi tizimdan foydalanishingizni yozing, uchrashuv vaqtini kelishib olamiz.'
+ },
+ en:{
+  eyebrow:'Power BI for distributors · Uzbekistan',
+  h1:'The boss opens the report at 8:00, and yesterday’s numbers are already there',
+  lead:'I connect your accounting system to Power BI. Data loads by itself every morning: sales, plan vs actual, agents, visits, customers, stock and receivables. No Excel exports, no manual summaries.',
+  cta1:'Message on Telegram',cta2:'See all 19 reports',
+  heroAlt:'“Overview” report: sales, plan completion, growth vs last year, active outlets, average order',
+  note1:'All screenshots use demo data of a fictional company. At our meeting I’ll show it on yours.',
+  band:sp(['Sales','Plan vs actual','Active outlets','Agents','Visits','Receivables','Stock','RFM','ABC','Returns']),
+  hMorning:'What you see on the first screen',
+  kv1:'19.0 bn',kv2:'89.2%',kv3:'+32.5%',kv5:'44.9%',
+  kl1:'sales year to date',kl2:'plan completion',kl3:'vs the same period last year',kl4:'active outlets',kl5:'of visits ended with an order',
+  note2:'Figures from the demo report, in UZS.',
+  hReports:'Reports your management gets',
+  fullSet:'The full set, 19 pages in one Power BI file:',
+  pages:sp(['Contents','Overview','Daily control','Year-over-year trend','Branches','Agents','Visits','Customers','Coverage funnel','New and lost customers','RFM segments','ABC analysis','SKU distribution','Prices and discounts','Returns','Stock','Receivables','Customer map','Root cause analysis']),
+  hPacks:'Packages and prices',
+  packsIntro:'One fixed price per project. No subscription: the reports and the daily refresh stay yours.',
+  pn1:'Start',pn2:'Business',pn3:'Turnkey',
+  pr1:'1,000 <small>USD</small>',pr2:'2,000 <small>USD</small>',pr3:'from 3,500 <small>USD</small>',
+  pm1:'2–3 weeks · 1 system',pm2:'4–6 weeks · up to 2 systems',pm3:'timeline after audit · 3+ systems',
+  pu1:li(['Sales and plan vs actual','Agents, customers, active outlets','Automatic daily refresh','1-hour training']),
+  pu2:li(['Everything in Start','Stock, receivables, returns, visits','Role-based access: each agent sees only their own data','Team training']),
+  pu3:li(['Several systems, including 1C','Single data warehouse','Reports built around your needs','Documentation']),
+  packsTerms:'Every package includes 30 days of free fixes after handover. Payment: 50% upfront, 50% on acceptance. Power BI licences are paid separately at Microsoft’s rates.',
+  hSteps:'How the project goes',
+  st1:step('Audit','Free, 30–60 minutes. We look at your systems and the numbers you need.'),
+  st2:step('Connection','Data loads into your own SQL Server database with a daily refresh.'),
+  st3:step('First version','I show the report on your data and collect feedback.'),
+  st4:step('Reconciliation','Report figures are checked against your accounting system.'),
+  st5:step('Handover','I hand over access, train your team and give 30 days of support.'),
+  hAbout:'Who builds it',
+  aboutP:'Asomiddin Nizamov, BI analyst. 9+ years in distribution and sales analytics.',
+  aboutUl:li(['Built analytics from scratch at a distribution company: SmartUp and Linko → SQL Server → Power BI, 200+ metrics.','At Pepsi, ran sales, visit, active/total outlet and territory plan reporting, reconciliations with accounting, 1C 8.3.']),
+  hAudit:'Free audit',
+  auditP:'Tell me which system you use and we’ll set up a meeting.'
+ }
+};
 const g=document.getElementById('gallery'),dlg=document.getElementById('viewer');
-for(const [src,t,d] of shots){
-  const b=document.createElement('button');b.className='shot';b.type='button';
-  b.innerHTML=`<img src="${src}" alt="Отчёт «${t}»" loading="lazy"><strong>${t}</strong><small>${d}</small>`;
-  b.onclick=()=>{dlg.querySelector('img').src=src;dlg.querySelector('img').alt=t;dlg.querySelector('p').textContent=t;dlg.showModal()};
+const RU={};
+document.querySelectorAll('[data-t]').forEach(e=>RU[e.dataset.t]=e.innerHTML);
+document.querySelectorAll('[data-ta]').forEach(e=>RU[e.dataset.ta]=e.alt);
+let lang=(()=>{
+  try{const q=new URLSearchParams(location.search).get('lang');if(q in L)return q;const s=localStorage.getItem('lang');if(s in L)return s}catch{}
+  return /^uz/i.test(navigator.language)?'uz':'ru';
+})();
+for(const [src,tx] of shots){
+  const b=document.createElement('button');b.className='shot';b.type='button';b._tx=tx;
+  b.innerHTML=`<img src="${src}" alt="" loading="lazy"><strong></strong><small></small>`;
+  b.onclick=()=>{const t=b.querySelector('strong').textContent;dlg.querySelector('img').src=src;dlg.querySelector('img').alt=t;dlg.querySelector('p').textContent=t;dlg.showModal()};
   g.append(b);
 }
+function applyTexts(){
+  const d=T[lang]||{};
+  document.querySelectorAll('[data-t]').forEach(e=>{e.innerHTML=d[e.dataset.t]??RU[e.dataset.t];if(e.classList.contains('track'))e.innerHTML=e.innerHTML.repeat(4)});
+  document.querySelectorAll('[data-ta]').forEach(e=>e.alt=d[e.dataset.ta]??RU[e.dataset.ta]);
+  document.querySelectorAll('.copy').forEach(b=>b.textContent=L[lang].copy);
+  g.querySelectorAll('.shot').forEach(b=>{const [t,x]=b._tx[lang];b.querySelector('strong').textContent=t;b.querySelector('small').textContent=x;b.querySelector('img').alt=L[lang].alt(t)});
+  document.documentElement.lang=lang;document.querySelector('meta[name=description]').content=L[lang].desc;
+  document.querySelectorAll('.lang button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===lang));
+}
+applyTexts();
 document.querySelector('.hero-shot img').style.cursor='zoom-in';
-document.querySelector('.hero-shot img').onclick=e=>{dlg.querySelector('img').src=e.target.src;dlg.querySelector('p').textContent='Обзор';dlg.showModal()};
+document.querySelector('.hero-shot img').onclick=e=>{dlg.querySelector('img').src=e.target.src;dlg.querySelector('p').textContent=L[lang].hero;dlg.showModal()};
 dlg.onclick=()=>dlg.close();
 document.querySelectorAll('.copy').forEach(b=>b.onclick=async()=>{
-  try{await navigator.clipboard.writeText(b.dataset.copy);b.textContent='Скопировано'}
+  try{await navigator.clipboard.writeText(b.dataset.copy);b.textContent=L[lang].copied}
   catch{const r=document.createRange();r.selectNodeContents(b.previousElementSibling);getSelection().removeAllRanges();getSelection().addRange(r)}
 });
 const still=matchMedia('(prefers-reduced-motion:reduce)').matches,root=document.documentElement;
@@ -340,23 +452,24 @@ function split(el,cls,words){
     el.append(s);
   }
 }
+let scrambleId,epoch=0;
 function scramble(el){
+  clearInterval(scrambleId);
   const t=el.textContent,g='▚▞▙▟▛▜01#%&/<>';let f=0;el.setAttribute('aria-label',t);
-  const id=setInterval(()=>{f++;el.textContent=[...t].map((ch,i)=>i<f/1.4||ch===' '?ch:g[Math.random()*g.length|0]).join('');if(f/1.4>=t.length)clearInterval(id)},26);
+  scrambleId=setInterval(()=>{f++;el.textContent=[...t].map((ch,i)=>i<f/1.4||ch===' '?ch:g[Math.random()*g.length|0]).join('');if(f/1.4>=t.length)clearInterval(scrambleId)},26);
 }
 function countUp(b){
-  const m=b.textContent.match(/\d[\d,]*/);if(!m||still)return;
-  const [pre,post]=[b.textContent.slice(0,m.index),b.textContent.slice(m.index+m[0].length)];
-  const dec=(m[0].split(',')[1]||'').length,end=parseFloat(m[0].replace(',','.')),t0=performance.now();
-  const step=t=>{const k=Math.min((t-t0)/1400,1),v=end*(1-(1-k)**4);
-    b.textContent=pre+v.toFixed(dec).replace('.',',')+post;if(k<1)requestAnimationFrame(step)};
+  const s=b.textContent,m=s.match(/\d[\d.,]*/);if(!m||still)return;
+  const sep=(m[0].match(/[.,]/)||[','])[0],dec=(m[0].split(sep)[1]||'').length,end=parseFloat(m[0].replace(',','.')),ep=epoch,t0=performance.now();
+  const step=t=>{if(ep!==epoch)return;const k=Math.min((t-t0)/1400,1),v=end*(1-(1-k)**4);
+    b.textContent=s.slice(0,m.index)+v.toFixed(dec).replace('.',sep)+s.slice(m.index+m[0].length);if(k<1)requestAnimationFrame(step)};
   requestAnimationFrame(step);
 }
 const h1=document.querySelector('h1'),lead=document.querySelector('.lead'),eyebrow=document.querySelector('.hero .eyebrow');
 split(h1,'split');split(lead,'words',true);
 document.querySelectorAll('section h2').forEach(h=>split(h,'mask'));
 document.querySelectorAll('.srcs span,.cta .btn').forEach(s=>s.style.setProperty('--n',[...s.parentNode.children].indexOf(s)));
-document.querySelectorAll('.track').forEach(t=>t.innerHTML=t.innerHTML.repeat(4));
+document.querySelectorAll('.track:not([data-t])').forEach(t=>t.innerHTML=t.innerHTML.repeat(4));
 Promise.race([document.fonts.ready,new Promise(r=>setTimeout(r,1500))]).then(()=>requestAnimationFrame(()=>{
   root.classList.add('ready');h1.classList.add('in');lead.classList.add('in');if(!still)scramble(eyebrow);
 }));
@@ -393,5 +506,19 @@ if(!still&&matchMedia('(hover:hover)').matches){
     b.addEventListener('pointerleave',()=>b.style.transform='');
   });
 }
+function setLang(l){
+  if(l===lang)return;
+  lang=l;epoch++;clearInterval(scrambleId);
+  try{localStorage.setItem('lang',l)}catch{}
+  const u=new URL(location.href);u.searchParams.set('lang',l);history.replaceState(null,'',u);
+  applyTexts();
+  const heads=[h1,lead,...document.querySelectorAll('section h2')];
+  split(h1,'split');split(lead,'words',true);document.querySelectorAll('section h2').forEach(h=>split(h,'mask'));
+  if(still)return;
+  scramble(eyebrow);root.classList.add('relang');
+  // replay the reveal on headings already on screen
+  for(const el of heads)if(el.classList.contains('in')){el.classList.remove('in');void el.offsetWidth;el.classList.add('in')}
+}
+document.querySelectorAll('.lang button').forEach(b=>b.onclick=()=>setLang(b.dataset.lang));
 </script>
 </body></html>
