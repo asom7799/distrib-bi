@@ -461,7 +461,7 @@ function scramble(el){
 function countUp(b){
   const s=b.textContent,m=s.match(/\d[\d.,]*/);if(!m||still)return;
   const sep=(m[0].match(/[.,]/)||[','])[0],dec=(m[0].split(sep)[1]||'').length,end=parseFloat(m[0].replace(',','.')),ep=epoch,t0=performance.now();
-  const step=t=>{if(ep!==epoch)return;const k=Math.min((t-t0)/1400,1),v=end*(1-(1-k)**4);
+  const step=()=>{if(ep!==epoch)return;const k=Math.min((performance.now()-t0)/1400,1),v=end*(1-(1-k)**4);
     b.textContent=s.slice(0,m.index)+v.toFixed(dec).replace('.',sep)+s.slice(m.index+m[0].length);if(k<1)requestAnimationFrame(step)};
   requestAnimationFrame(step);
 }
@@ -484,12 +484,14 @@ rv.forEach(el=>{
 });
 
 const bar=document.querySelector('.prog'),bg=document.querySelector('.bg'),tracks=[...document.querySelectorAll('.track')];
-let x=0,vel=0,lastY=scrollY;
+// time-based (px per 60Hz frame), so speed is the same on 60/120Hz screens
+let x=0,vel=0,lastY=scrollY,lastT=performance.now();
 (function loop(){
-  const y=scrollY,max=root.scrollHeight-innerHeight;vel+=((y-lastY)-vel)*.15;lastY=y;
+  const now=performance.now(),dt=now-lastT,y=scrollY,max=root.scrollHeight-innerHeight;
   bar.style.transform=`scaleX(${max>0?y/max:0})`;
-  if(!still){
-    x+=.7+Math.abs(vel)*.6;const sk=Math.max(-14,Math.min(14,-vel*.5));
+  if(dt>0&&!still){
+    const f=Math.min(dt,100)/16.7;vel+=((y-lastY)/f-vel)*Math.min(.15*f,1);lastY=y;lastT=now;
+    x+=(.7+Math.abs(vel)*.6)*f;const sk=Math.max(-14,Math.min(14,-vel*.5));
     tracks.forEach((t,i)=>{const w=t.scrollWidth/2,o=x%w;t.style.transform=`translateX(${i?o-w:-o}px) skewX(${sk}deg)`});
   }
   requestAnimationFrame(loop);
