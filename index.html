@@ -97,11 +97,74 @@ section{display:grid;gap:24px;min-width:0}
 .copy{font:500 13px/1 var(--f-body);padding:7px 10px;border-radius:6px;border:1px solid currentColor;background:transparent;color:inherit;cursor:pointer;opacity:.85}
 .contact p{opacity:.85}
 
-/* viewer */
-dialog{padding:0;border:0;background:transparent;max-width:96vw;max-height:94vh}
+/* viewer: big screenshot + what the page answers */
+dialog{padding:0;border:0;background:transparent;max-width:min(1100px,96vw);max-height:94vh}
 dialog::backdrop{background:rgba(8,12,18,.82)}
-dialog img{display:block;max-width:96vw;max-height:88vh;border-radius:8px}
-dialog p{color:#e7ebf1;text-align:center;padding-top:8px;font-size:14px}
+dialog img{display:block;max-width:100%;max-height:62vh;border-radius:10px 10px 0 0;margin-inline:auto}
+.dinfo{background:var(--paper);color:var(--ink);border-radius:0 0 10px 10px;padding:16px 20px;display:grid;gap:8px}
+.dinfo .dt{font:700 18px/1.2 var(--f-display)}
+.dinfo .dq{color:var(--muted)}
+.dinfo ul{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+.dinfo li{font-size:13px;padding:4px 9px;border-radius:6px;background:var(--chip);color:var(--deep)}
+.dinfo .dq:empty,.dinfo ul:empty{display:none}
+
+/* sections deeper down: nav, catalog, metrics, connection, timeline, comparison, FAQ */
+section{scroll-margin-top:72px}
+.topnav{position:fixed;top:12px;left:12px;right:150px;z-index:11;display:flex}
+.topnav div{display:flex;gap:2px;padding:3px;border-radius:999px;border:1px solid var(--line);background:color-mix(in srgb,var(--paper) 78%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);overflow-x:auto;scrollbar-width:none;max-width:100%}
+.topnav div::-webkit-scrollbar{display:none}
+.topnav a{flex:none;font:500 13px/1 var(--f-body);padding:9px 12px;border-radius:999px;color:var(--muted);text-decoration:none;transition:background .3s,color .3s}
+.topnav a:hover{color:var(--ink)}
+.topnav a.on{background:var(--chip);color:var(--ink)}
+.topnav a:focus-visible{outline:2px solid var(--deep);outline-offset:1px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{all:unset;cursor:pointer;font:500 14px/1 var(--f-body);padding:9px 14px;border-radius:999px;border:1px solid var(--line);color:var(--muted);transition:background .25s,color .25s,border-color .25s}
+.chips button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.chips button:focus-visible{outline:2px solid var(--deep);outline-offset:2px}
+.shot .num{font:500 11px/1 var(--f-mono);letter-spacing:.12em;color:var(--accent)}
+.kch{display:flex;flex-wrap:wrap;gap:6px}
+.kch span{font-size:12px;line-height:1.25;padding:4px 8px;border-radius:6px;background:var(--chip);color:var(--deep)}
+.mgrid,.faq{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;align-items:start}
+.mg,.faq details{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:0 18px}
+.mg summary,.faq summary{cursor:pointer;list-style:none;display:flex;gap:12px;align-items:center;padding:16px 0;font-weight:600}
+.mg summary::-webkit-details-marker,.faq summary::-webkit-details-marker{display:none}
+.mg summary::after,.faq summary::after{content:'+';margin-left:auto;font:500 20px/1 var(--f-mono);color:var(--accent);transition:transform .3s}
+.mg[open] summary::after,.faq details[open] summary::after{transform:rotate(45deg)}
+.mg summary small{font:500 12px/1 var(--f-mono);color:var(--muted);padding:3px 7px;border-radius:6px;background:var(--chip)}
+.mg dl{margin:0 0 16px;display:grid;gap:10px}
+.mg dt{font-weight:600;font-size:15px}
+.mg dd{margin:2px 0 0;color:var(--muted);font-size:14px}
+.faq p{padding-bottom:16px;color:var(--muted);font-size:15px}
+.flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+.flow div{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:6px;align-content:start}
+.flow div:not(:last-child)::after{content:'→';position:absolute;right:-13px;top:50%;translate:0 -50%;z-index:1;font:500 15px/1 var(--f-mono);color:var(--accent);background:var(--bg);padding:2px}
+.flow b{font-weight:600}
+.flow span{font-size:14px;color:var(--muted);line-height:1.45}
+@media (max-width:820px){.flow{grid-template-columns:1fr}.flow div:not(:last-child)::after{content:'↓';right:auto;left:50%;top:auto;bottom:-15px;translate:-50% 0}}
+.sys-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.sys{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:18px;display:grid;gap:12px;align-content:start}
+.sys h3,.cols h3{margin:0;font:600 17px/1.2 var(--f-body)}
+.sys p{font-size:14px;color:var(--muted);line-height:1.5}
+.sys p b{display:block;color:var(--accent);font:500 11px/1.6 var(--f-mono);letter-spacing:.1em;text-transform:uppercase}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px}
+.cols > div{display:grid;gap:14px;align-content:start}
+.check{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.check li{position:relative;padding-left:30px;color:var(--muted);font-size:15px}
+.check li::before{content:'✓';position:absolute;left:0;top:1px;width:20px;height:20px;border-radius:50%;background:color-mix(in srgb,var(--accent) 18%,transparent);color:var(--accent);font:700 12px/20px var(--f-body);text-align:center}
+.tl{display:grid;gap:10px}
+.tl div{display:grid;grid-template-columns:100px 1fr;gap:12px;align-items:center;font-size:14px;font-weight:600}
+.tl i{display:block;height:30px;border-radius:8px;background:linear-gradient(90deg,var(--accent),color-mix(in srgb,var(--accent) 50%,var(--deep)));color:var(--accent-ink);font:500 12px/30px var(--f-mono);padding-left:10px;font-style:normal;white-space:nowrap;overflow:hidden}
+.tl i.dash{background:repeating-linear-gradient(90deg,var(--chip) 0 12px,transparent 12px 18px);color:var(--muted);border:1px dashed var(--line)}
+.cmp-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--paper)}
+.cmp{width:100%;border-collapse:collapse;font-size:14px;min-width:560px}
+.cmp th,.cmp td{padding:12px 14px;border-bottom:1px solid var(--line);text-align:center}
+.cmp th:first-child,.cmp td:first-child{text-align:left;color:var(--muted);font-weight:400}
+.cmp thead th{font:600 15px/1.2 var(--f-body);color:var(--ink)}
+.cmp tr:last-child td{border-bottom:0}
+.cmp .y{color:var(--accent);font-weight:700}
+.cmp .n{color:var(--muted);opacity:.5}
+.cmp td:nth-child(3),.cmp th:nth-child(3){background:color-mix(in srgb,var(--accent) 8%,transparent)}
+@media (max-width:600px){.cmp{min-width:0;font-size:12.5px}.cmp th,.cmp td{padding:10px 6px}.cmp thead th{font-size:13px}}
 
 
 /* motion layer — kinetic type + scroll choreography; everything resolves to the static layout without JS or with reduced motion */
@@ -194,8 +257,8 @@ section > h2::before,.about > div:first-child > h2::before{counter-increment:sec
 .lang button:hover{color:var(--ink)}
 .lang button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
 .lang button:focus-visible{outline:2px solid var(--deep);outline-offset:1px}
-.js .lang{opacity:0;translate:0 -12px;transition:opacity .6s .4s,translate .6s .4s}
-.ready .lang{opacity:1;translate:none}
+.js .lang,.js .topnav{opacity:0;translate:0 -12px;transition:opacity .6s .4s,translate .6s .4s}
+.ready .lang,.ready .topnav{opacity:1;translate:none}
 @media (max-width:600px){.wrap{padding-top:68px}}
 /* replay after a language switch: no intro delays */
 .relang.js .split .c{transition-delay:calc(var(--n)*18ms)}
@@ -211,6 +274,7 @@ section > h2::before,.about > div:first-child > h2::before{counter-increment:sec
 </style>
 </head><body>
 
+<nav class="topnav" aria-label="Разделы"><div id="topnav"></div></nav>
 <nav class="lang" aria-label="Til / Язык / Language"><button type="button" data-lang="uz" lang="uz">UZ</button><button type="button" data-lang="ru" lang="ru">RU</button><button type="button" data-lang="en" lang="en">EN</button></nav>
 <div class="prog" aria-hidden="true"></div>
 <div class="bg" aria-hidden="true"><i></i><i></i><i></i></div>
@@ -251,14 +315,40 @@ section > h2::before,.about > div:first-child > h2::before{counter-increment:sec
 
   <section id="reports" aria-labelledby="h-reports">
     <h2 id="h-reports" data-t="hReports">Отчёты, которые получает руководитель</h2>
+    <p class="terms" data-t="fullSet">18 страниц с данными и страница «Содержание» с кнопками перехода, всё в одном файле Power BI. На каждой странице фильтры по году, месяцу и филиалу. Нажмите на отчёт, чтобы увидеть его крупно.</p>
+    <div class="chips" id="roles" role="group"></div>
     <div class="grid" id="gallery"></div>
-    <p class="terms" data-t="fullSet">Полный набор, 19 страниц в одном файле Power BI:</p>
-    <div class="all-pages" data-t="pages">
-      <span>Содержание</span><span>Обзор</span><span>Ежедневный контроль</span><span>Динамика к прошлому году</span><span>Филиалы</span><span>Агенты</span><span>Визиты</span><span>Клиенты</span><span>Воронка покрытия</span><span>Новые и ушедшие</span><span>RFM-сегменты</span><span>ABC-анализ</span><span>Дистрибуция SKU</span><span>Цены и скидки</span><span>Возвраты</span><span>Склад</span><span>Дебиторка</span><span>Карта клиентов</span><span>Анализ причин</span>
-    </div>
   </section>
 
-  <section aria-labelledby="h-packs">
+  <section id="metrics" aria-labelledby="h-metrics">
+    <h2 id="h-metrics" data-t="hMetrics">64 показателя внутри</h2>
+    <p class="terms" data-t="metricsIntro">Каждый показатель считается одинаково на всех страницах. Продажи считаются только по доставленным заказам, возвраты вычитаются.</p>
+    <div class="mgrid" id="mgrid"></div>
+    <p class="note" data-t="metricsNote">Плюс служебные расчёты: рабочие дни, даты последней покупки и оплаты, координаты.</p>
+  </section>
+
+  <section id="connect" aria-labelledby="h-connect">
+    <h2 id="h-connect" data-t="hConnect">Как подключается</h2>
+    <p class="terms" data-t="connectIntro">Ничего не нужно выгружать руками. Каждое утро данные сами идут из вашей системы в базу на вашем компьютере, а Power BI обновляется из неё.</p>
+    <div class="flow" id="flow"></div>
+    <div class="sys-grid" id="sys"></div>
+    <p class="note" data-t="sysNote">Несколько систем можно подключить в одну базу, например SmartUp и 1С.</p>
+    <div class="cols" id="cols"></div>
+  </section>
+
+  <section id="process" aria-labelledby="h-steps">
+    <h2 id="h-steps" data-t="hSteps">Как проходит проект</h2>
+    <ol class="steps">
+      <li data-t="st1"><b>Аудит</b><span>Бесплатно, 30–60 минут онлайн или в офисе. Смотрим ваши системы и нужные цифры. Итог: какой пакет подходит и точный срок.</span></li>
+      <li data-t="st2"><b>Подключение</b><span>Ставлю SQL Server, настраиваю загрузку из вашей системы и ежедневное обновление в 06:00.</span></li>
+      <li data-t="st3"><b>Первая версия</b><span>Показываю отчёт на ваших данных, собираю замечания и доработки.</span></li>
+      <li data-t="st4"><b>Сверка</b><span>Сверяем цифры отчёта с учётной системой: продажи, возвраты, долги. Расхождения разбираем до нуля.</span></li>
+      <li data-t="st5"><b>Сдача</b><span>Передаю доступы и инструкцию, обучаю команду, 30 дней бесплатных исправлений.</span></li>
+    </ol>
+    <div class="tl" id="tl"></div>
+  </section>
+
+  <section id="prices" aria-labelledby="h-packs">
     <h2 id="h-packs" data-t="hPacks">Пакеты и цены</h2>
     <p class="terms" data-t="packsIntro">Одна фиксированная цена за проект. Абонентской платы нет, отчёты и обновление остаются вашими.</p>
     <div class="packs">
@@ -272,7 +362,7 @@ section > h2::before,.about > div:first-child > h2::before{counter-increment:sec
         <h3 data-t="pn2">Бизнес</h3>
         <p class="price" data-t="pr2">2 000 <small>USD</small></p>
         <p class="meta" data-t="pm2">4–6 недель · до 2 систем</p>
-        <ul data-t="pu2"><li>Всё из «Старт»</li><li>Остатки, дебиторка, возвраты, визиты</li><li>Доступ по ролям: агент видит своё</li><li>Обучение команды</li></ul>
+        <ul data-t="pu2"><li>Всё из «Старт»</li><li>Остатки, дебиторка, возвраты, визиты</li><li>Настраиваю доступ по ролям: агент видит своё</li><li>Обучение команды</li></ul>
       </article>
       <article class="pack">
         <h3 data-t="pn3">Под ключ</h3>
@@ -281,18 +371,13 @@ section > h2::before,.about > div:first-child > h2::before{counter-increment:sec
         <ul data-t="pu3"><li>Несколько систем, включая 1С</li><li>Единое хранилище данных</li><li>Отчёты под ваши задачи</li><li>Документация</li></ul>
       </article>
     </div>
-    <p class="terms" data-t="packsTerms">Во все пакеты входит 30 дней бесплатных исправлений после сдачи. Оплата: 50% предоплата, 50% после приёмки. Лицензии Power BI оплачиваются отдельно по тарифам Microsoft.</p>
+    <div class="cmp-wrap"><table class="cmp" id="cmp"></table></div>
+    <div class="cols" id="terms"></div>
   </section>
 
-  <section aria-labelledby="h-steps">
-    <h2 id="h-steps" data-t="hSteps">Как проходит проект</h2>
-    <ol class="steps">
-      <li data-t="st1"><b>Аудит</b><span>Бесплатно, 30–60 минут. Смотрим ваши системы и нужные цифры.</span></li>
-      <li data-t="st2"><b>Подключение</b><span>Загрузка данных в вашу базу SQL Server и ежедневное обновление.</span></li>
-      <li data-t="st3"><b>Первая версия</b><span>Показываю отчёт на ваших данных, собираю замечания.</span></li>
-      <li data-t="st4"><b>Сверка</b><span>Цифры отчёта сверяются с учётной системой.</span></li>
-      <li data-t="st5"><b>Сдача</b><span>Передаю доступы, обучаю команду, 30 дней поддержки.</span></li>
-    </ol>
+  <section id="faq" aria-labelledby="h-faq">
+    <h2 id="h-faq" data-t="hFaq">Частые вопросы</h2>
+    <div class="faq" id="faqs"></div>
   </section>
 
   <section class="about" aria-labelledby="h-about">
@@ -314,20 +399,195 @@ section > h2::before,.about > div:first-child > h2::before{counter-increment:sec
 
 </main>
 
-<dialog id="viewer"><img alt=""><p></p></dialog>
+<dialog id="viewer"><img alt=""><div class="dinfo"><p class="dt"></p><p class="dq"></p><ul class="dk"></ul></div></dialog>
 
 <script>
-const shots=[
- ["img/02-kontrol.png",{ru:["Ежедневный контроль","Факт месяца, прогноз до конца месяца и сколько нужно продавать в день, по каждому агенту."],uz:["Kunlik nazorat","Oy fakti, oy oxirigacha prognoz va har bir agent kuniga qancha sotishi kerakligi."],en:["Daily control","Month-to-date actuals, month-end forecast and the daily sales needed, per agent."]}],
- ["img/05-agenty.png",{ru:["Агенты","Выполнение плана, АКБ, заказы и средний чек каждого агента."],uz:["Agentlar","Har bir agentning reja bajarilishi, AKB, buyurtmalari va oʻrtacha cheki."],en:["Agents","Plan completion, active outlets, orders and average order for every agent."]}],
- ["img/03-dinamika.png",{ru:["Динамика к прошлому году","Рост с начала года по месяцам и какие бренды дали прирост."],uz:["Oʻtgan yilga nisbatan dinamika","Yil boshidan oylar boʻyicha oʻsish va qaysi brendlar oʻsish berdi."],en:["Year-over-year trend","Growth by month since January and which brands drove it."]}],
- ["img/08-voronka.png",{ru:["Воронка покрытия","Все клиенты → посещены → купили. Где теряются точки."],uz:["Qamrov voronkasi","Barcha mijozlar → tashrif qilingan → xarid qilgan. Nuqtalar qayerda yoʻqoladi."],en:["Coverage funnel","All customers → visited → bought. Where outlets drop out."]}],
- ["img/10-rfm.png",{ru:["RFM-сегменты","VIP, лояльные, под угрозой, потерянные. Кому звонить сегодня."],uz:["RFM segmentlar","VIP, sodiq, xavf ostida, yoʻqotilgan. Bugun kimga qoʻngʻiroq qilish kerak."],en:["RFM segments","VIP, loyal, at risk, lost. Who to call today."]}],
- ["img/12-distribuciya.png",{ru:["Дистрибуция SKU","Доля точек, которые покупают каждый бренд и товар."],uz:["SKU distributsiyasi","Har bir brend va tovarni xarid qiladigan nuqtalar ulushi."],en:["SKU distribution","Share of outlets buying each brand and product."]}],
- ["img/16-debitorka.png",{ru:["Дебиторка","Долги клиентов по давности последней оплаты."],uz:["Debitorlik","Mijozlar qarzi oxirgi toʻlovdan beri oʻtgan vaqt boʻyicha."],en:["Receivables","Customer debt by time since the last payment."]}],
- ["img/17-karta.png",{ru:["Карта клиентов","Торговые точки по координатам, размер = продажи."],uz:["Mijozlar xaritasi","Savdo nuqtalari koordinatalar boʻyicha, oʻlcham = sotuv."],en:["Customer map","Outlets by coordinates, size = sales."]}],
- ["img/18-prichiny.png",{ru:["Анализ причин","Продажи по филиалам, каналам, брендам и агентам в одном дереве."],uz:["Sabablar tahlili","Filial, kanal, brend va agentlar boʻyicha sotuv bitta daraxtda."],en:["Root cause analysis","Sales by branch, channel, brand and agent in one tree."]}]
+// content of the detailed sections, one {ru,uz,en} per text; facts come from powerbi/build_report.py, build_model.py and etl/*.py
+const t3=(ru,uz,en)=>({ru,uz,en});
+const REPORTS=[
+ {n:1,img:'01-obzor.png',role:'boss',name:t3('Обзор','Umumiy koʻrinish','Overview'),
+  q:t3('Как идут продажи, план и рост, на одном экране.','Sotuv, reja va oʻsish qanday ketyapti, bitta ekranda.','How sales, plan and growth are going, on one screen.'),
+  k:t3(['Чистые продажи','Выполнение плана %','Рост к прошлому году %','АКБ','Средний чек','Продажи по филиалам, брендам и каналам'],['Sof sotuv','Reja bajarilishi %','Oʻtgan yilga oʻsish %','AKB','Oʻrtacha chek','Filial, brend va kanallar boʻyicha sotuv'],['Net sales','Plan completion %','Growth vs last year %','Active outlets','Average order','Sales by branch, brand and channel'])},
+ {n:2,img:'02-kontrol.png',role:'boss',name:t3('Ежедневный контроль','Kunlik nazorat','Daily control'),
+  q:t3('Закроем ли месяц и сколько каждому агенту нужно продавать в день.','Oyni yopamizmi va har bir agent kuniga qancha sotishi kerak.','Will we close the month, and how much each agent must sell per day.'),
+  k:t3(['Прогноз до конца месяца','Прогноз выполнения %','Нужно продавать в день','Осталось рабочих дней','Агенты по степени риска'],['Oy oxirigacha prognoz','Prognoz bajarilishi %','Kuniga qancha sotish kerak','Qolgan ish kunlari','Xavf darajasi boʻyicha agentlar'],['Month-end forecast','Forecast completion %','Required sales per day','Working days left','Agents ranked by risk'])},
+ {n:3,img:'03-dinamika.png',role:'boss',name:t3('Динамика к прошлому году','Oʻtgan yilga nisbatan dinamika','Year-over-year trend'),
+  q:t3('Растём ли мы к прошлому году и за счёт каких брендов и филиалов.','Oʻtgan yilga nisbatan oʻsyapmizmi va qaysi brend va filiallar hisobiga.','Are we growing vs last year, and which brands and branches drive it.'),
+  k:t3(['Продажи с начала года','Рост с начала года %','Прирост по брендам (водопад)','Филиалы: рост и АКБ'],['Yil boshidan sotuv','Yil boshidan oʻsish %','Brendlar boʻyicha oʻsish (sharshara)','Filiallar: oʻsish va AKB'],['Sales year to date','YTD growth %','Growth by brand (waterfall)','Branches: growth and active outlets'])},
+ {n:4,img:'04-filialy.jpg',role:'boss',name:t3('Филиалы','Filiallar','Branches'),
+  q:t3('Как работают филиалы и супервайзеры.','Filiallar va supervayzerlar qanday ishlayapti.','How branches and supervisors perform.'),
+  k:t3(['План и факт по филиалам','Выполнение плана %','Филиал × месяц','Супервайзеры: продажи, план, АКБ'],['Filiallar boʻyicha reja va fakt','Reja bajarilishi %','Filial × oy','Supervayzerlar: sotuv, reja, AKB'],['Plan vs actual by branch','Plan completion %','Branch × month','Supervisors: sales, plan, active outlets'])},
+ {n:5,img:'05-agenty.png',role:'agents',name:t3('Агенты','Agentlar','Agents'),
+  q:t3('Кто из агентов выполняет план и превращает визиты в заказы.','Qaysi agentlar rejani bajaryapti va tashriflarni buyurtmaga aylantiryapti.','Which agents hit plan and turn visits into orders.'),
+  k:t3(['Выполнение плана % и отклонение','АКБ и заказы','Средний чек','Результативность визитов %'],['Reja bajarilishi % va farq','AKB va buyurtmalar','Oʻrtacha chek','Tashrif samaradorligi %'],['Plan completion % and gap','Active outlets and orders','Average order','Visit strike rate %'])},
+ {n:6,img:'06-vizity.jpg',role:'agents',name:t3('Визиты','Tashriflar','Visits'),
+  q:t3('Достаточно ли агенты посещают точки, по маршруту ли, и заканчивается ли визит заказом.','Agentlar nuqtalarga yetarli borishyaptimi, marshrut boʻyichami va tashrif buyurtma bilan tugayaptimi.','Do agents visit enough, on route, and do visits end in orders.'),
+  k:t3(['Визиты на агента в день','Плановые визиты %','Результативность %','Средняя длительность визита','Визиты по дням недели'],['Bir agentga kunlik tashriflar','Rejadagi tashriflar %','Samaradorlik %','Tashrifning oʻrtacha davomiyligi','Hafta kunlari boʻyicha tashriflar'],['Visits per agent per day','On-route visits %','Strike rate %','Average visit length','Visits by weekday'])},
+ {n:7,img:'07-klienty.jpg',role:'clients',name:t3('Клиенты','Mijozlar','Customers'),
+  q:t3('Сколько активных клиентов и кто главные покупатели.','Faol mijozlar qancha va asosiy xaridorlar kim.','How big the active base is and who the top buyers are.'),
+  k:t3(['АКБ и ОКБ','Покрытие АКБ %','Продажи на клиента','Клиенты с долгом и SKU'],['AKB va OKB','AKB qamrovi %','Bir mijozga sotuv','Qarz va SKU bilan mijozlar'],['Active and total outlets','Active coverage %','Sales per customer','Customers with debt and SKUs'])},
+ {n:8,img:'08-voronka.png',role:'agents',name:t3('Воронка покрытия','Qamrov voronkasi','Coverage funnel'),
+  q:t3('Где теряются точки: вся база → посещены → купили.','Nuqtalar qayerda yoʻqolyapti: butun baza → tashrif → xarid.','Where outlets drop out: whole base → visited → bought.'),
+  k:t3(['Воронка ОКБ → визиты → АКБ','Охват визитами %','Покрытие по категориям и филиалам'],['OKB → tashrif → AKB voronkasi','Tashrif qamrovi %','Kategoriya va filiallar boʻyicha qamrov'],['Base → visited → buying funnel','Visit reach %','Coverage by category and branch'])},
+ {n:9,img:'09-novye.jpg',role:'clients',name:t3('Новые и ушедшие','Yangi va ketgan mijozlar','New and lost customers'),
+  q:t3('Кто пришёл, кто перестал покупать и кому позвонить.','Kim keldi, kim xarid qilishni toʻxtatdi va kimga qoʻngʻiroq qilish kerak.','Who came, who stopped buying, and whom to call.'),
+  k:t3(['Новые клиенты по месяцам','Ушедшие: 60+ дней без покупок','Список «давно не покупали» с долгом'],['Oylar boʻyicha yangi mijozlar','Ketganlar: 60+ kun xaridsiz','«Uzoq vaqt xarid qilmagan» roʻyxati, qarz bilan'],['New customers by month','Lost: 60+ days without buying','“Haven’t bought lately” list with debt'])},
+ {n:10,img:'10-rfm.png',role:'clients',name:t3('RFM-сегменты','RFM segmentlar','RFM segments'),
+  q:t3('В каком сегменте каждый клиент: VIP, лояльные, под угрозой, потерянные.','Har bir mijoz qaysi segmentda: VIP, sodiq, xavf ostida, yoʻqotilgan.','Which segment each customer is in: VIP, loyal, at risk, lost.'),
+  k:t3(['Клиенты и продажи по сегментам','Дней без покупок','Список клиентов внутри сегмента'],['Segmentlar boʻyicha mijozlar va sotuv','Xaridsiz kunlar','Segment ichidagi mijozlar roʻyxati'],['Customers and sales by segment','Days since last purchase','Customer list inside each segment'])},
+ {n:11,img:'11-abc.jpg',role:'clients',name:t3('ABC-анализ','ABC tahlil','ABC analysis'),
+  q:t3('Какие товары и клиенты дают 80% продаж.','Qaysi tovar va mijozlar sotuvning 80% ini beradi.','Which products and customers make 80% of sales.'),
+  k:t3(['ABC товаров','ABC клиентов','Бренд → товар (treemap)'],['Tovarlar ABC','Mijozlar ABC','Brend → tovar (treemap)'],['Product ABC','Customer ABC','Brand → product treemap'])},
+ {n:12,img:'12-distribuciya.png',role:'agents',name:t3('Дистрибуция SKU','SKU distributsiyasi','SKU distribution'),
+  q:t3('Какая доля активных точек покупает каждый бренд и товар.','Faol nuqtalarning qancha qismi har bir brend va tovarni oladi.','What share of active outlets buys each brand and product.'),
+  k:t3(['Нумерическая дистрибуция %','Бренд × филиал','Среднее число SKU в заказе по агентам'],['Numerik distributsiya %','Brend × filial','Agentlar boʻyicha buyurtmadagi oʻrtacha SKU'],['Numeric distribution %','Brand × branch','Average SKUs per order by agent'])},
+ {n:13,img:'13-ceny.jpg',role:'fin',name:t3('Цены и скидки','Narxlar va chegirmalar','Prices and discounts'),
+  q:t3('Сколько уходит на скидки и кому.','Chegirmalarga qancha ketyapti va kimga.','How much goes on discounts, and to whom.'),
+  k:t3(['Валовые продажи и скидки','Скидка % по каналам и категориям','Средняя цена и средний чек'],['Yalpi sotuv va chegirmalar','Kanal va kategoriyalar boʻyicha chegirma %','Oʻrtacha narx va oʻrtacha chek'],['Gross sales and discounts','Discount % by channel and category','Average price and average order'])},
+ {n:14,img:'14-vozvraty.jpg',role:'fin',name:t3('Возвраты','Qaytarishlar','Returns'),
+  q:t3('Почему и где возвращают товар.','Tovar nima uchun va qayerda qaytarilyapti.','Why and where goods come back.'),
+  k:t3(['Сумма и доля возвратов %','Причины возврата','Возвраты по брендам и агентам'],['Qaytarish summasi va ulushi %','Qaytarish sabablari','Brend va agentlar boʻyicha qaytarishlar'],['Returns amount and share %','Return reasons','Returns by brand and agent'])},
+ {n:15,img:'15-sklad.jpg',role:'fin',name:t3('Склад','Ombor','Stock'),
+  q:t3('На сколько дней хватит остатка, что закончится и что лежит мёртвым грузом.','Qoldiq necha kunga yetadi, nima tugaydi va nima oʻlik yuk boʻlib yotibdi.','How many days the stock will last, what runs out and what is dead stock.'),
+  k:t3(['Остаток в сумме и штуках','Дней запаса','SKU с запасом < 7 и > 45 дней','Риск дефицита'],['Qoldiq summada va donada','Zaxira kunlari','Zaxirasi < 7 va > 45 kunlik SKU','Taqchillik xavfi'],['Stock value and units','Days of stock','SKUs with < 7 and > 45 days of stock','Stock-out risk'])},
+ {n:16,img:'16-debitorka.png',role:'fin',name:t3('Дебиторка','Debitorlik','Receivables'),
+  q:t3('Кто должен, сколько и как давно не платил.','Kim qarzdor, qancha va qachondan beri toʻlamagan.','Who owes, how much, and how long since they paid.'),
+  k:t3(['Дебиторка и 30+ дней без оплаты','Долг по давности оплаты','Оплаты по типам','Топ должников'],['Debitorlik va 30+ kun toʻlovsiz','Toʻlov muddati boʻyicha qarz','Turlari boʻyicha toʻlovlar','Eng katta qarzdorlar'],['Receivables and 30+ days unpaid','Debt by payment age','Payments by type','Top debtors'])},
+ {n:17,img:'17-karta.png',role:'clients',name:t3('Карта клиентов','Mijozlar xaritasi','Customer map'),
+  q:t3('Где находятся точки и продажи.','Savdo nuqtalari va sotuv qayerda joylashgan.','Where outlets and sales are located.'),
+  k:t3(['Точки по координатам, размер = продажи','Цвет = RFM-сегмент','Города: АКБ и продажи'],['Koordinatalar boʻyicha nuqtalar, oʻlcham = sotuv','Rang = RFM segment','Shaharlar: AKB va sotuv'],['Outlets by coordinates, size = sales','Colour = RFM segment','Cities: active outlets and sales'])},
+ {n:18,img:'18-prichiny.png',role:'boss',name:t3('Анализ причин','Sabablar tahlili','Root cause analysis'),
+  q:t3('Из чего складывается цифра продаж, в один клик.','Sotuv raqami nimalardan tashkil topgan, bir klikda.','What is behind the sales figure, in one click.'),
+  k:t3(['Дерево декомпозиции','Филиал, канал, категория, бренд, агент, сегмент'],['Dekompozitsiya daraxti','Filial, kanal, kategoriya, brend, agent, segment'],['Decomposition tree','Branch, channel, category, brand, agent, segment'])}
 ];
+const X={
+ nav:[['#reports',t3('Отчёты','Hisobotlar','Reports')],['#metrics',t3('Показатели','Koʻrsatkichlar','Metrics')],['#connect',t3('Подключение','Ulanish','Connection')],['#process',t3('Сроки','Muddatlar','Timeline')],['#prices',t3('Цены','Narxlar','Prices')],['#faq',t3('Вопросы','Savollar','FAQ')]],
+ roles:[['all',t3('Все 18','Hammasi 18','All 18')],['boss',t3('Руководителю','Rahbarga','Management')],['agents',t3('Агенты и визиты','Agentlar va tashriflar','Agents & visits')],['clients',t3('Клиенты','Mijozlar','Customers')],['fin',t3('Склад и финансы','Ombor va moliya','Stock & finance')]],
+ metrics:[
+  {name:t3('Продажи','Sotuv','Sales'),items:t3([
+    ['Чистые продажи','Продажи минус возвраты, только доставленные заказы.'],['Валовые продажи, Скидки, Скидка %','Продажи до скидки, сумма и доля скидок.'],['Сумма возвратов, Доля возвратов %, Количество возвратов','Сколько вернули и какая это часть продаж.'],['Количество, шт · Заказы','Проданные штуки и число документов продаж.'],['Средний чек · Средняя цена','Продажи на заказ и на штуку.'],['SKU продано · Ср. SKU в заказе','Ширина ассортимента в продажах.'],['Нумерическая дистрибуция %','Доля АКБ, которая купила бренд или товар.'],['Доля в продажах %','Вклад строки в общий итог.'],['Продажи прошлый год · Рост % · Прирост','Тот же период прошлого года, до той же даты.'],['Продажи с начала года · ПГ · Рост с начала года %','Нарастающий итог с января и сравнение с прошлым годом.']
+   ],[
+    ['Sof sotuv','Sotuv minus qaytarishlar, faqat yetkazilgan buyurtmalar.'],['Yalpi sotuv, chegirmalar, chegirma %','Chegirmagacha sotuv, chegirma summasi va ulushi.'],['Qaytarish summasi, ulushi %, soni','Qancha qaytdi va bu sotuvning qancha qismi.'],['Miqdor, dona · Buyurtmalar','Sotilgan dona va sotuv hujjatlari soni.'],['Oʻrtacha chek · Oʻrtacha narx','Bir buyurtmaga va bir donaga sotuv.'],['Sotilgan SKU · Buyurtmadagi oʻrtacha SKU','Sotuvdagi assortiment kengligi.'],['Numerik distributsiya %','Brend yoki tovarni olgan AKB ulushi.'],['Sotuvdagi ulush %','Qatorning umumiy natijadagi hissasi.'],['Oʻtgan yil sotuvi · Oʻsish % · Oʻsish','Oʻtgan yilning shu davri, shu sanagacha.'],['Yil boshidan sotuv · Oʻtgan yil · Oʻsish %','Yanvardan yigʻma natija va oʻtgan yil bilan solishtirish.']
+   ],[
+    ['Net sales','Sales minus returns, delivered orders only.'],['Gross sales, discounts, discount %','Sales before discount, discount amount and share.'],['Returns amount, share %, count','How much came back and what share of sales it is.'],['Units · Orders','Units sold and number of sales documents.'],['Average order · Average price','Sales per order and per unit.'],['SKUs sold · Avg SKUs per order','How wide the range in sales is.'],['Numeric distribution %','Share of active outlets that bought the brand or item.'],['Share of sales %','Each row’s contribution to the total.'],['Last year sales · Growth % · Growth','Same period last year, up to the same date.'],['YTD sales · Last year YTD · YTD growth %','Running total since January compared with last year.']
+   ])},
+  {name:t3('План и ежедневный контроль','Reja va kunlik nazorat','Plan and daily control'),items:t3([
+    ['План продаж','План по агентам на месяц, загружается из Excel.'],['Выполнение плана % · Отклонение от плана','Факт ÷ план и разница в сумме.'],['Продажи в день','Факт ÷ прошедшие рабочие дни (пн–сб).'],['Прогноз продаж · Прогноз выполнения %','Текущий темп × рабочие дни месяца.'],['Нужно продавать в день','(План − факт) ÷ оставшиеся рабочие дни.'],['Осталось рабочих дней','Сколько рабочих дней до конца месяца.']
+   ],[
+    ['Sotuv rejasi','Agentlar boʻyicha oylik reja, Exceldan yuklanadi.'],['Reja bajarilishi % · Rejadan farq','Fakt ÷ reja va summadagi farq.'],['Kunlik sotuv','Fakt ÷ oʻtgan ish kunlari (dsh–shn).'],['Sotuv prognozi · Prognoz bajarilishi %','Joriy surʼat × oydagi ish kunlari.'],['Kuniga qancha sotish kerak','(Reja − fakt) ÷ qolgan ish kunlari.'],['Qolgan ish kunlari','Oy oxirigacha nechta ish kuni qoldi.']
+   ],[
+    ['Sales plan','Monthly plan per agent, loaded from Excel.'],['Plan completion % · Gap to plan','Actual ÷ plan and the difference in money.'],['Sales per day','Actual ÷ working days elapsed (Mon–Sat).'],['Sales forecast · Forecast completion %','Current pace × working days in the month.'],['Required sales per day','(Plan − actual) ÷ working days left.'],['Working days left','How many working days remain this month.']
+   ])},
+  {name:t3('Клиенты','Mijozlar','Customers'),items:t3([
+    ['АКБ · ОКБ · Покрытие АКБ %','Купившие клиенты, вся база и их соотношение.'],['Продажи на клиента','Продажи ÷ АКБ.'],['Посещено клиентов · Охват визитами %','Сколько точек базы агенты посетили.'],['Новые клиенты','Первая покупка в выбранном периоде.'],['Ушедшие клиенты','60–150 дней без покупок.'],['Дней без покупок','С даты последней покупки.'],['RFM-сегмент','VIP, лояльные, стабильные, новые, под угрозой, потерянные.'],['ABC клиентов и товаров','A = первые 80% продаж, B = следующие 15%, C = остальное.']
+   ],[
+    ['AKB · OKB · AKB qamrovi %','Xarid qilgan mijozlar, butun baza va ularning nisbati.'],['Bir mijozga sotuv','Sotuv ÷ AKB.'],['Tashrif qilingan mijozlar · Tashrif qamrovi %','Agentlar bazadagi nechta nuqtaga borgan.'],['Yangi mijozlar','Birinchi xarid tanlangan davrda.'],['Ketgan mijozlar','60–150 kun xaridsiz.'],['Xaridsiz kunlar','Oxirgi xarid sanasidan beri.'],['RFM segment','VIP, sodiq, barqaror, yangi, xavf ostida, yoʻqotilgan.'],['Mijoz va tovarlar ABC','A = sotuvning birinchi 80%, B = keyingi 15%, C = qolgani.']
+   ],[
+    ['Active · Total · Active coverage %','Customers who bought, the whole base and the ratio.'],['Sales per customer','Sales ÷ active outlets.'],['Customers visited · Visit reach %','How many outlets in the base agents visited.'],['New customers','First purchase in the selected period.'],['Lost customers','60–150 days without buying.'],['Days without buying','Since the last purchase date.'],['RFM segment','VIP, loyal, stable, new, at risk, lost.'],['Customer and product ABC','A = first 80% of sales, B = next 15%, C = the rest.']
+   ])},
+  {name:t3('Визиты','Tashriflar','Visits'),items:t3([
+    ['Количество визитов · Визиты с заказом','Все визиты агентов и те, что закончились заказом.'],['Результативность визитов %','Визиты с заказом ÷ все визиты.'],['Визиты на агента в день','Средняя нагрузка агента.'],['Плановые визиты %','Доля визитов по маршруту.'],['Средняя длительность визита','В минутах.']
+   ],[
+    ['Tashriflar soni · Buyurtmali tashriflar','Agentlarning barcha tashriflari va buyurtma bilan tugaganlari.'],['Tashrif samaradorligi %','Buyurtmali tashriflar ÷ barcha tashriflar.'],['Bir agentga kunlik tashrif','Agentning oʻrtacha yuklamasi.'],['Rejadagi tashriflar %','Marshrut boʻyicha tashriflar ulushi.'],['Tashrifning oʻrtacha davomiyligi','Daqiqalarda.']
+   ],[
+    ['Visits · Visits with an order','All agent visits and those that ended in an order.'],['Visit strike rate %','Visits with an order ÷ all visits.'],['Visits per agent per day','Average agent workload.'],['On-route visits %','Share of visits on the planned route.'],['Average visit length','In minutes.']
+   ])},
+  {name:t3('Дебиторка и оплаты','Debitorlik va toʻlovlar','Receivables and payments'),items:t3([
+    ['Сумма оплат','Оплаты клиентов за период.'],['Дебиторка','Все продажи минус все оплаты на конец периода.'],['Дебиторка 30+ дней без оплаты','Долг клиентов, которые не платили больше месяца.'],['Клиентов с долгом','Сколько клиентов должны.'],['Давность оплаты','Группы 0–7, 8–14, 15–30, 31–60, 60+ дней, нет оплат.']
+   ],[
+    ['Toʻlovlar summasi','Davr ichidagi mijoz toʻlovlari.'],['Debitorlik','Barcha sotuv minus barcha toʻlovlar, davr oxiriga.'],['Debitorlik 30+ kun toʻlovsiz','Bir oydan ortiq toʻlamagan mijozlar qarzi.'],['Qarzdor mijozlar','Nechta mijoz qarzdor.'],['Toʻlov muddati','0–7, 8–14, 15–30, 31–60, 60+ kun, toʻlovsiz guruhlar.']
+   ],[
+    ['Payments','Customer payments in the period.'],['Receivables','All sales minus all payments at period end.'],['Receivables 30+ days unpaid','Debt of customers who haven’t paid for over a month.'],['Customers with debt','How many customers owe.'],['Payment age','Buckets 0–7, 8–14, 15–30, 31–60, 60+ days, never paid.']
+   ])},
+  {name:t3('Склад','Ombor','Stock'),items:t3([
+    ['Остаток, шт · Остаток, сумма','Последний снимок остатков на дату.'],['Дней запаса','Остаток ÷ средние продажи в день.'],['SKU без остатка','Сколько позиций закончилось.'],['SKU с запасом < 7 дней','Риск дефицита.'],['SKU с запасом > 45 дней','Затоваривание, мёртвый груз.']
+   ],[
+    ['Qoldiq, dona · Qoldiq, summa','Sanaga oxirgi qoldiq holati.'],['Zaxira kunlari','Qoldiq ÷ kunlik oʻrtacha sotuv.'],['Qoldiqsiz SKU','Nechta pozitsiya tugagan.'],['Zaxirasi < 7 kun SKU','Taqchillik xavfi.'],['Zaxirasi > 45 kun SKU','Ortiqcha zaxira, oʻlik yuk.']
+   ],[
+    ['Stock, units · Stock, value','Latest stock snapshot on the date.'],['Days of stock','Stock ÷ average daily sales.'],['SKUs out of stock','How many items have run out.'],['SKUs with < 7 days','Stock-out risk.'],['SKUs with > 45 days','Overstock, dead stock.']
+   ])}
+ ],
+ flow:[
+  [t3('Ваша система','Sizning tizimingiz','Your system'),t3('SmartUp, Linko, Sales Doctor или 1С','SmartUp, Linko, Sales Doctor yoki 1C','SmartUp, Linko, Sales Doctor or 1C')],
+  [t3('06:00 · загрузка','06:00 · yuklash','06:00 · load'),t3('По API или из Excel, каждое утро само.','API yoki Exceldan, har kuni ertalab oʻzi.','Via API or from Excel, every morning on its own.')],
+  [t3('SQL Server','SQL Server','SQL Server'),t3('База на вашем компьютере или сервере.','Baza sizning kompyuteringiz yoki serveringizda.','A database on your own PC or server.')],
+  [t3('07:00 · Power BI','07:00 · Power BI','07:00 · Power BI'),t3('Отчёт обновляется из базы.','Hisobot bazadan yangilanadi.','The report refreshes from the database.')],
+  [t3('Телефон и ПК','Telefon va kompyuter','Phone and PC'),t3('В 8:00 руководитель открывает готовые цифры.','8:00 da rahbar tayyor raqamlarni ochadi.','At 8:00 management opens the finished numbers.')]
+ ],
+ sysLabels:[t3('Как подключаю','Qanday ulayman','How I connect'),t3('Что нужно от вас','Sizdan nima kerak','What I need from you'),t3('Какие данные','Qaysi maʼlumotlar','What data')],
+ sys:[
+  ['SmartUp',t3('По API','API orqali','Via API'),t3('Логин и пароль API.','API login va paroli.','API login and password.'),t3('Продажи, возвраты, визиты, клиенты, товары. Оплаты и остатки берём из выгрузки Excel.','Sotuv, qaytarish, tashrif, mijozlar, tovarlar. Toʻlov va qoldiqni Excel eksportidan olamiz.','Sales, returns, visits, customers, products. Payments and stock come from an Excel export.')],
+  ['Linko',t3('По API','API orqali','Via API'),t3('Токен, его выдаёт техподдержка Linko.','Token, uni Linko texnik yordami beradi.','A token issued by Linko support.'),t3('Продажи, возвраты, оплаты, остатки, клиенты, товары. Визитов в API Linko нет.','Sotuv, qaytarish, toʻlov, qoldiq, mijozlar, tovarlar. Linko APIʼda tashriflar yoʻq.','Sales, returns, payments, stock, customers, products. Linko’s API has no visits.')],
+  ['Sales Doctor',t3('По API','API orqali','Via API'),t3('Домен, логин и пароль. Лучше отдельный пользователь для отчётов.','Domen, login va parol. Hisobotlar uchun alohida foydalanuvchi maʼqul.','Domain, login and password. A separate reporting user is best.'),t3('Продажи, возвраты, визиты, оплаты, остатки, клиенты, товары.','Sotuv, qaytarish, tashrif, toʻlov, qoldiq, mijozlar, tovarlar.','Sales, returns, visits, payments, stock, customers, products.')],
+  [t3('1С и другие','1C va boshqalar','1C and others'),t3('Выгрузка Excel или CSV по шаблону','Shablon boʻyicha Excel yoki CSV eksport','Excel or CSV export to a template'),t3('Отчёты вроде «Продажи по номенклатуре», сохранённые в папку.','«Продажи по номенклатуре» kabi hisobotlar papkaga saqlanadi.','Reports such as “Sales by item” saved to a folder.'),t3('Всё, что есть в выгрузке: продажи, клиенты, товары, оплаты, остатки.','Eksportdagi hamma narsa: sotuv, mijozlar, tovarlar, toʻlov, qoldiq.','Everything in the export: sales, customers, products, payments, stock.')]
+ ],
+ secH:t3('Безопасность','Xavfsizlik','Security'),
+ sec:t3([
+  'Данные хранятся в базе SQL Server на вашем компьютере или сервере, не у меня.','Логины и токены лежат только на вашей машине.','Из учётной системы данные только читаются, в ней ничего не меняется.','Каждая загрузка пишется в журнал: когда, сколько строк, были ли ошибки.','Каждый день перезагружаются последние 35 дней, поэтому документы, исправленные задним числом, тоже подтягиваются.'
+ ],[
+  'Maʼlumotlar menda emas, sizning kompyuteringiz yoki serveringizdagi SQL Server bazasida saqlanadi.','Login va tokenlar faqat sizning kompyuteringizda turadi.','Hisob tizimidan maʼlumot faqat oʻqiladi, unda hech narsa oʻzgarmaydi.','Har bir yuklash jurnalga yoziladi: qachon, nechta qator, xato boʻldimi.','Har kuni oxirgi 35 kun qayta yuklanadi, shuning uchun orqa sana bilan tuzatilgan hujjatlar ham olinadi.'
+ ],[
+  'Data lives in a SQL Server database on your own PC or server, not with me.','Logins and tokens stay only on your machine.','Data is only read from your system; nothing is changed there.','Every load is logged: when, how many rows, any errors.','Each day the last 35 days are reloaded, so documents corrected after the fact are picked up too.'
+ ]),
+ needH:t3('Что нужно от вас','Sizdan nima kerak','What I need from you'),
+ need:t3([
+  'Доступ к API вашей системы или выгрузки Excel.','План продаж по агентам на месяц в Excel.','Компьютер или сервер с Windows, который включён по утрам. SQL Server Express бесплатный, установлю сам.','Лицензии Power BI Pro для тех, кто смотрит отчёт в браузере или на телефоне: по прайсу Microsoft около 14 $ за пользователя в месяц.','Один сотрудник, который сверит цифры с учётной системой.'
+ ],[
+  'Tizimingiz APIʼsiga kirish yoki Excel eksportlari.','Agentlar boʻyicha oylik sotuv rejasi Excelda.','Ertalab yoqilgan turadigan Windows kompyuter yoki server. SQL Server Express bepul, oʻzim oʻrnataman.','Hisobotni brauzer yoki telefonda koʻradiganlar uchun Power BI Pro litsenziyasi: Microsoft narxi boʻyicha bir foydalanuvchiga oyiga taxminan 14 $.','Raqamlarni hisob tizimi bilan solishtiradigan bitta xodim.'
+ ],[
+  'API access to your system, or Excel exports.','A monthly sales plan per agent in Excel.','A Windows PC or server that is on in the morning. SQL Server Express is free and I install it.','Power BI Pro licences for people who view the report in a browser or on a phone: Microsoft’s list price is about $14 per user per month.','One person who will check the figures against your system.'
+ ]),
+ tl:[
+  [t3('Старт','Start','Start'),t3('2–3 недели','2–3 hafta','2–3 weeks'),50,0],
+  [t3('Бизнес','Biznes','Business'),t3('4–6 недель','4–6 hafta','4–6 weeks'),100,0],
+  [t3('Под ключ','Toʻliq yechim','Turnkey'),t3('срок после аудита','muddat auditdan keyin','timeline after the audit'),100,1]
+ ],
+ cmpHead:[t3('Что входит','Nima kiradi','What’s included'),t3('Старт','Start','Start'),t3('Бизнес','Biznes','Business'),t3('Под ключ','Toʻliq yechim','Turnkey')],
+ cmp:[
+  [t3('Систем подключаю','Ulanadigan tizimlar','Systems connected'),'1',t3('до 2','2 tagacha','up to 2'),'3+'],
+  [t3('Срок','Muddat','Timeline'),t3('2–3 недели','2–3 hafta','2–3 weeks'),t3('4–6 недель','4–6 hafta','4–6 weeks'),t3('после аудита','auditdan keyin','after audit')],
+  [t3('Продажи, план-факт, агенты, клиенты, АКБ','Sotuv, reja-fakt, agentlar, mijozlar, AKB','Sales, plan vs actual, agents, customers, active outlets'),'y','y','y'],
+  [t3('Ежедневное автообновление','Har kuni avtomatik yangilanish','Automatic daily refresh'),'y','y','y'],
+  [t3('Остатки, дебиторка, возвраты, визиты','Qoldiq, debitorlik, qaytarish, tashriflar','Stock, receivables, returns, visits'),'n','y','y'],
+  [t3('Доступ по ролям: агент видит своё','Rollar boʻyicha kirish: agent oʻzinikini koʻradi','Role-based access: agents see their own'),'n','y','y'],
+  [t3('1С и несколько систем в одной базе','1C va bir nechta tizim bitta bazada','1C and several systems in one database'),'n','n','y'],
+  [t3('Отчёты под ваши задачи','Vazifalaringizga mos hisobotlar','Reports built for your needs'),'n','n','y'],
+  [t3('Документация','Hujjatlashtirish','Documentation'),'n','n','y'],
+  [t3('Обучение','Oʻqitish','Training'),t3('1 час','1 soat','1 hour'),t3('команда','jamoa','team'),t3('команда','jamoa','team')],
+  [t3('30 дней бесплатных исправлений','30 kun bepul tuzatish','30 days of free fixes'),'y','y','y']
+ ],
+ termsH:t3('Условия','Shartlar','Terms'),
+ terms:t3([
+  'Цена фиксируется после аудита и не меняется в ходе проекта.','Оплата: 50% предоплата, 50% после приёмки.','30 дней бесплатных исправлений после сдачи. Доработки и новые отчёты после этого — по договорённости.'
+ ],[
+  'Narx auditdan keyin belgilanadi va loyiha davomida oʻzgarmaydi.','Toʻlov: 50% oldindan, 50% qabul qilingandan keyin.','Topshirilgandan keyin 30 kun bepul tuzatish. Undan keyingi qoʻshimchalar va yangi hisobotlar — kelishuv boʻyicha.'
+ ],[
+  'The price is fixed after the audit and does not change during the project.','Payment: 50% upfront, 50% on acceptance.','30 days of free fixes after handover. Changes and new reports after that are by agreement.'
+ ]),
+ terms2:t3([
+  'Абонентской платы нет: отчёты, база и обновление остаются у вас.','Лицензии Power BI оплачиваются Microsoft отдельно: Power BI Pro около 14 $ за пользователя в месяц. Power BI Desktop бесплатный.','Первую версию на ваших данных вы видите до финальной оплаты.'
+ ],[
+  'Oylik toʻlov yoʻq: hisobotlar, baza va yangilanish sizda qoladi.','Power BI litsenziyalari Microsoftʼga alohida toʻlanadi: Power BI Pro bir foydalanuvchiga oyiga taxminan 14 $. Power BI Desktop bepul.','Sizning maʼlumotlaringizdagi birinchi versiyani yakuniy toʻlovdan oldin koʻrasiz.'
+ ],[
+  'No subscription: the reports, database and refresh stay with you.','Power BI licences are paid to Microsoft separately: Power BI Pro is about $14 per user per month. Power BI Desktop is free.','You see the first version on your data before the final payment.'
+ ]),
+ faq:[
+  [t3('Нужен ли нам сервер?','Bizga server kerakmi?','Do we need a server?'),t3('Нет. Достаточно компьютера с Windows, который включён по утрам. SQL Server Express бесплатный. Если сервер есть, ставлю на него.','Yoʻq. Ertalab yoqilgan turadigan Windows kompyuter yetarli. SQL Server Express bepul. Server boʻlsa, unga oʻrnataman.','No. A Windows PC that is on in the morning is enough. SQL Server Express is free. If you have a server, I install it there.')],
+  [t3('Где хранятся наши данные?','Maʼlumotlarimiz qayerda saqlanadi?','Where is our data stored?'),t3('В вашей базе SQL Server. У меня копии нет, логины и токены остаются на вашей машине.','Sizning SQL Server bazangizda. Menda nusxa yoʻq, login va tokenlar sizning kompyuteringizda qoladi.','In your own SQL Server database. I keep no copy; logins and tokens stay on your machine.')],
+  [t3('У нас 1С. Подойдёт?','Bizda 1C. Mos keladimi?','We use 1C. Will it work?'),t3('Да, через выгрузку Excel или CSV по готовому шаблону. Прямого подключения к 1С нет, но выгрузку можно сохранять в папку по расписанию.','Ha, tayyor shablon boʻyicha Excel yoki CSV eksport orqali. 1C ga toʻgʻridan-toʻgʻri ulanish yoʻq, lekin eksportni jadval boʻyicha papkaga saqlash mumkin.','Yes, through an Excel or CSV export to a ready template. There is no direct 1C connection, but the export can be saved to a folder on a schedule.')],
+  [t3('Как часто обновляются данные?','Maʼlumotlar qanchalik tez-tez yangilanadi?','How often is the data refreshed?'),t3('Каждое утро: загрузка в 06:00, обновление Power BI в 07:00. Можно чаще: Power BI Pro позволяет до 8 обновлений в день.','Har kuni ertalab: 06:00 da yuklash, 07:00 da Power BI yangilanadi. Koʻproq ham mumkin: Power BI Pro kuniga 8 martagacha yangilashga ruxsat beradi.','Every morning: load at 06:00, Power BI refresh at 07:00. More often is possible: Power BI Pro allows up to 8 refreshes a day.')],
+  [t3('Сможет ли агент видеть только свои данные?','Agent faqat oʻz maʼlumotlarini koʻra oladimi?','Can an agent see only their own data?'),t3('Да. В пакетах «Бизнес» и «Под ключ» настраиваю доступ по ролям: агент или супервайзер видит только свою часть.','Ha. «Biznes» va «Toʻliq yechim» paketlarida rollar boʻyicha kirishni sozlayman: agent yoki supervayzer faqat oʻz qismini koʻradi.','Yes. In the Business and Turnkey packages I set up role-based access: an agent or supervisor sees only their part.')],
+  [t3('Сколько стоит Power BI?','Power BI qancha turadi?','How much does Power BI cost?'),t3('Power BI Desktop бесплатный. Чтобы смотреть отчёт в браузере и на телефоне, нужен Power BI Pro: около 14 $ за пользователя в месяц по прайсу Microsoft. Платите напрямую Microsoft.','Power BI Desktop bepul. Hisobotni brauzer va telefonda koʻrish uchun Power BI Pro kerak: Microsoft narxi boʻyicha bir foydalanuvchiga oyiga taxminan 14 $. Toʻgʻridan-toʻgʻri Microsoftʼga toʻlaysiz.','Power BI Desktop is free. To view the report in a browser and on a phone you need Power BI Pro: about $14 per user per month at Microsoft’s list price, paid directly to Microsoft.')],
+  [t3('Можно смотреть с телефона?','Telefondan koʻrish mumkinmi?','Can we view it on a phone?'),t3('Да, в приложении Power BI для iPhone и Android, с лицензией Pro.','Ha, Power BI ilovasida iPhone va Android uchun, Pro litsenziyasi bilan.','Yes, in the Power BI app for iPhone and Android, with a Pro licence.')],
+  [t3('Можно добавить свой отчёт или показатель?','Oʻz hisobotimiz yoki koʻrsatkichimizni qoʻshish mumkinmi?','Can we add our own report or metric?'),t3('Да. В пакете «Под ключ» это входит в цену. В остальных пакетах — по договорённости.','Ha. «Toʻliq yechim» paketida bu narxga kiradi. Boshqa paketlarda — kelishuv boʻyicha.','Yes. It is included in the Turnkey package. In the others it is by agreement.')],
+  [t3('Что будет после 30 дней?','30 kundan keyin nima boʻladi?','What happens after 30 days?'),t3('Отчёты продолжают работать и обновляться сами. Доработки, новые отчёты и помощь — по договорённости.','Hisobotlar ishlashda va oʻzi yangilanishda davom etadi. Qoʻshimchalar, yangi hisobotlar va yordam — kelishuv boʻyicha.','The reports keep working and refreshing on their own. Changes, new reports and help are by agreement.')],
+  [t3('Что если документ исправили задним числом?','Hujjat orqa sana bilan tuzatilsa-chi?','What if a document is corrected after the fact?'),t3('Каждый день перезагружаются последние 35 дней, поэтому исправления подтягиваются сами.','Har kuni oxirgi 35 kun qayta yuklanadi, shuning uchun tuzatishlar oʻzi olinadi.','The last 35 days are reloaded every day, so corrections come through automatically.')],
+  [t3('Сколько времени займёт наша сторона?','Biz tomondan qancha vaqt ketadi?','How much of our time will it take?'),t3('Аудит 30–60 минут, затем ответы на вопросы и сверка цифр. Обычно это несколько часов в неделю от одного сотрудника.','Audit 30–60 daqiqa, keyin savollarga javob va raqamlarni solishtirish. Odatda bitta xodimdan haftasiga bir necha soat.','The audit takes 30–60 minutes, then answering questions and checking figures. Usually a few hours a week from one person.')],
+  [t3('Если мы сменим учётную систему?','Hisob tizimini almashtirsak-chi?','What if we change our system?'),t3('Отчёты остаются: подключаю новую систему к той же базе, страницы Power BI не меняются. Стоимость — по договорённости.','Hisobotlar qoladi: yangi tizimni oʻsha bazaga ulayman, Power BI sahifalari oʻzgarmaydi. Narxi — kelishuv boʻyicha.','The reports stay: I connect the new system to the same database and the Power BI pages don’t change. The cost is by agreement.')],
+  [t3('Можно сначала посмотреть на наших данных?','Avval oʻz maʼlumotlarimizda koʻrish mumkinmi?','Can we see it on our data first?'),t3('На бесплатном аудите показываю демо. Первую версию на ваших данных вы видите в начале проекта, до финальной оплаты.','Bepul auditda demoni koʻrsataman. Sizning maʼlumotlaringizdagi birinchi versiyani loyiha boshida, yakuniy toʻlovdan oldin koʻrasiz.','At the free audit I show the demo. You see the first version on your data early in the project, before the final payment.')],
+  [t3('С какими системами вы работали?','Qaysi tizimlar bilan ishlagansiz?','Which systems have you worked with?'),t3('SmartUp и Linko в дистрибуционной компании, 1С 8.3 в Pepsi. Для Sales Doctor готов коннектор по их API.','Distributsiya kompaniyasida SmartUp va Linko, Pepsiʼda 1C 8.3. Sales Doctor uchun ularning APIʼsiga tayyor konnektor bor.','SmartUp and Linko at a distribution company, 1C 8.3 at Pepsi. For Sales Doctor there is a ready connector for their API.')]
+ ]
+};
 const L={
   ru:{copy:'Копировать',copied:'Скопировано',hero:'Обзор',alt:t=>`Отчёт «${t}»`,desc:'Power BI отчёты для дистрибьюторов: SmartUp, Linko, Sales Doctor, 1С. Демо, пакеты и цены.'},
   uz:{copy:'Nusxalash',copied:'Nusxalandi',hero:'Umumiy koʻrinish',alt:t=>`«${t}» hisoboti`,desc:'Distribyutorlar uchun Power BI hisobotlar: SmartUp, Linko, Sales Doctor, 1C. Demo, paketlar va narxlar.'},
@@ -337,6 +597,13 @@ const li=a=>a.map(x=>`<li>${x}</li>`).join(''),sp=a=>a.map(x=>`<span>${x}</span>
 const step=(b,t)=>`<b>${b}</b><span>${t}</span>`;
 const T={
  uz:{
+  hMetrics:'Ichidagi 64 koʻrsatkich',
+  metricsIntro:'Har bir koʻrsatkich barcha sahifalarda bir xil hisoblanadi. Sotuv faqat yetkazilgan buyurtmalar boʻyicha, qaytarishlar ayiriladi.',
+  metricsNote:'Shuningdek yordamchi hisoblar: ish kunlari, oxirgi xarid va toʻlov sanalari, koordinatalar.',
+  hConnect:'Qanday ulanadi',
+  connectIntro:'Qoʻlda hech narsa yuklash shart emas. Har kuni ertalab maʼlumotlar tizimingizdan kompyuteringizdagi bazaga oʻzi oʻtadi, Power BI esa undan yangilanadi.',
+  sysNote:'Bir nechta tizimni bitta bazaga ulash mumkin, masalan SmartUp va 1C.',
+  hFaq:'Koʻp beriladigan savollar',
   eyebrow:'Distribyutorlar uchun Power BI · Oʻzbekiston',
   h1:'Rahbar hisobotni soat 8:00 da ochadi, kechagi raqamlar esa allaqachon tayyor',
   lead:'Hisob tizimingizni Power BIʼga ulayman. Maʼlumotlar har kuni ertalab oʻzi yuklanadi: sotuv, reja-fakt, agentlar, tashriflar, mijozlar, ombor va debitorlik. Excelʼga qoʻlda yuklash va qoʻlda jamlashsiz.',
@@ -348,23 +615,21 @@ const T={
   kv1:'19,0 mlrd',kl1:'yil boshidan beri sotuv',kl2:'reja bajarilishi',kl3:'oʻtgan yilning shu davriga nisbatan',kl4:'AKB, faol savdo nuqtalari',kl5:'tashriflar buyurtma bilan yakunlangan',
   note2:'Raqamlar demo hisobotdan, soʻmda.',
   hReports:'Rahbar oladigan hisobotlar',
-  fullSet:'Toʻliq toʻplam, bitta Power BI faylida 19 sahifa:',
-  pages:sp(['Mundarija','Umumiy koʻrinish','Kunlik nazorat','Oʻtgan yilga nisbatan dinamika','Filiallar','Agentlar','Tashriflar','Mijozlar','Qamrov voronkasi','Yangi va ketgan mijozlar','RFM segmentlar','ABC tahlil','SKU distributsiyasi','Narxlar va chegirmalar','Qaytarishlar','Ombor','Debitorlik','Mijozlar xaritasi','Sabablar tahlili']),
+  fullSet:'18 ta maʼlumotli sahifa va oʻtish tugmalari bor «Mundarija» sahifasi, hammasi bitta Power BI faylida. Har bir sahifada yil, oy va filial boʻyicha filtrlar. Hisobotni kattaroq koʻrish uchun ustiga bosing.',
   hPacks:'Paketlar va narxlar',
   packsIntro:'Loyiha uchun bitta qatʼiy narx. Oylik toʻlov yoʻq, hisobotlar va yangilanish sizda qoladi.',
   pn1:'Start',pn2:'Biznes',pn3:'Toʻliq yechim',
   pr3:'3 500 <small>USD dan</small>',
   pm1:'2–3 hafta · 1 tizim',pm2:'4–6 hafta · 2 tagacha tizim',pm3:'muddat auditdan keyin · 3+ tizim',
   pu1:li(['Sotuv va reja-fakt','Agentlar, mijozlar, AKB','Har kuni avtomatik yangilanish','1 soatlik oʻqitish']),
-  pu2:li(['«Start»dagi hammasi','Qoldiqlar, debitorlik, qaytarishlar, tashriflar','Rollar boʻyicha kirish: agent faqat oʻzinikini koʻradi','Jamoani oʻqitish']),
+  pu2:li(['«Start»dagi hammasi','Qoldiqlar, debitorlik, qaytarishlar, tashriflar','Rollar boʻyicha kirishni sozlayman: agent oʻzinikini koʻradi','Jamoani oʻqitish']),
   pu3:li(['Bir nechta tizim, 1C ham','Yagona maʼlumotlar ombori','Vazifalaringizga mos hisobotlar','Hujjatlashtirish']),
-  packsTerms:'Barcha paketlarga topshirilgandan keyin 30 kun bepul tuzatishlar kiradi. Toʻlov: 50% oldindan, 50% qabul qilingandan keyin. Power BI litsenziyalari Microsoft tariflari boʻyicha alohida toʻlanadi.',
   hSteps:'Loyiha qanday oʻtadi',
-  st1:step('Audit','Bepul, 30–60 daqiqa. Tizimlaringiz va kerakli raqamlarni koʻrib chiqamiz.'),
-  st2:step('Ulash','Maʼlumotlarni SQL Server bazangizga yuklash va har kuni yangilash.'),
-  st3:step('Birinchi versiya','Hisobotni sizning maʼlumotlaringizda koʻrsataman, izohlarni yigʻaman.'),
-  st4:step('Solishtirish','Hisobot raqamlari hisob tizimi bilan solishtiriladi.'),
-  st5:step('Topshirish','Kirish huquqlarini beraman, jamoani oʻqitaman, 30 kun qoʻllab-quvvatlayman.'),
+  st1:step('Audit','Bepul, 30–60 daqiqa onlayn yoki ofisda. Tizimlaringiz va kerakli raqamlarni koʻrib chiqamiz. Natija: qaysi paket mos va aniq muddat.'),
+  st2:step('Ulash','SQL Server oʻrnataman, tizimingizdan yuklashni va har kuni 06:00 dagi yangilanishni sozlayman.'),
+  st3:step('Birinchi versiya','Hisobotni sizning maʼlumotlaringizda koʻrsataman, izoh va qoʻshimchalarni yigʻaman.'),
+  st4:step('Solishtirish','Hisobot raqamlarini hisob tizimi bilan solishtiramiz: sotuv, qaytarish, qarzlar. Farqlarni nolgacha tekshiramiz.'),
+  st5:step('Topshirish','Kirish huquqlari va yoʻriqnomani beraman, jamoani oʻqitaman, 30 kun bepul tuzatish.'),
   hAbout:'Kim qiladi',
   aboutP:'Asomiddin Nizamov, BI-tahlilchi. Distributsiya va savdo tahlilida 9 yildan ortiq tajriba.',
   aboutUl:li(['Distributsiya kompaniyasida tahlilni noldan qurdim: SmartUp va Linko → SQL Server → Power BI, 200 dan ortiq koʻrsatkich.','Pepsiʼda hududlar boʻyicha sotuv, tashriflar, AKB/OKB va reja hisobotlarini yuritdim, buxgalteriya bilan solishtirdim, 1C 8.3.']),
@@ -372,6 +637,13 @@ const T={
   auditP:'Qaysi tizimdan foydalanishingizni yozing, uchrashuv vaqtini kelishib olamiz.'
  },
  en:{
+  hMetrics:'64 metrics inside',
+  metricsIntro:'Every metric is calculated the same way on every page. Sales count delivered orders only, with returns subtracted.',
+  metricsNote:'Plus helper calculations: working days, last purchase and payment dates, coordinates.',
+  hConnect:'How it connects',
+  connectIntro:'Nothing has to be exported by hand. Every morning the data moves from your system into a database on your own computer, and Power BI refreshes from it.',
+  sysNote:'Several systems can feed one database, for example SmartUp plus 1C.',
+  hFaq:'Frequently asked questions',
   eyebrow:'Power BI for distributors · Uzbekistan',
   h1:'The boss opens the report at 8:00, and yesterday’s numbers are already there',
   lead:'I connect your accounting system to Power BI. Data loads by itself every morning: sales, plan vs actual, agents, visits, customers, stock and receivables. No Excel exports, no manual summaries.',
@@ -384,23 +656,21 @@ const T={
   kl1:'sales year to date',kl2:'plan completion',kl3:'vs the same period last year',kl4:'active outlets',kl5:'of visits ended with an order',
   note2:'Figures from the demo report, in UZS.',
   hReports:'Reports your management gets',
-  fullSet:'The full set, 19 pages in one Power BI file:',
-  pages:sp(['Contents','Overview','Daily control','Year-over-year trend','Branches','Agents','Visits','Customers','Coverage funnel','New and lost customers','RFM segments','ABC analysis','SKU distribution','Prices and discounts','Returns','Stock','Receivables','Customer map','Root cause analysis']),
+  fullSet:'18 data pages plus a Contents page with navigation buttons, all in one Power BI file. Every page filters by year, month and branch. Click a report to see it large.',
   hPacks:'Packages and prices',
   packsIntro:'One fixed price per project. No subscription: the reports and the daily refresh stay yours.',
   pn1:'Start',pn2:'Business',pn3:'Turnkey',
   pr1:'1,000 <small>USD</small>',pr2:'2,000 <small>USD</small>',pr3:'from 3,500 <small>USD</small>',
   pm1:'2–3 weeks · 1 system',pm2:'4–6 weeks · up to 2 systems',pm3:'timeline after audit · 3+ systems',
   pu1:li(['Sales and plan vs actual','Agents, customers, active outlets','Automatic daily refresh','1-hour training']),
-  pu2:li(['Everything in Start','Stock, receivables, returns, visits','Role-based access: each agent sees only their own data','Team training']),
+  pu2:li(['Everything in Start','Stock, receivables, returns, visits','I set up role-based access: each agent sees only their own data','Team training']),
   pu3:li(['Several systems, including 1C','Single data warehouse','Reports built around your needs','Documentation']),
-  packsTerms:'Every package includes 30 days of free fixes after handover. Payment: 50% upfront, 50% on acceptance. Power BI licences are paid separately at Microsoft’s rates.',
   hSteps:'How the project goes',
-  st1:step('Audit','Free, 30–60 minutes. We look at your systems and the numbers you need.'),
-  st2:step('Connection','Data loads into your own SQL Server database with a daily refresh.'),
-  st3:step('First version','I show the report on your data and collect feedback.'),
-  st4:step('Reconciliation','Report figures are checked against your accounting system.'),
-  st5:step('Handover','I hand over access, train your team and give 30 days of support.'),
+  st1:step('Audit','Free, 30–60 minutes online or at your office. We look at your systems and the numbers you need. Outcome: the right package and an exact timeline.'),
+  st2:step('Connection','I install SQL Server and set up loading from your system with a daily refresh at 06:00.'),
+  st3:step('First version','I show the report on your data and collect feedback and changes.'),
+  st4:step('Reconciliation','We check the report against your accounting system: sales, returns, debts. Every difference is resolved.'),
+  st5:step('Handover','I hand over access and instructions, train your team, and give 30 days of free fixes.'),
   hAbout:'Who builds it',
   aboutP:'Asomiddin Nizamov, BI analyst. 9+ years in distribution and sales analytics.',
   aboutUl:li(['Built analytics from scratch at a distribution company: SmartUp and Linko → SQL Server → Power BI, 200+ metrics.','At Pepsi, ran sales, visit, active/total outlet and territory plan reporting, reconciliations with accounting, 1C 8.3.']),
@@ -416,24 +686,55 @@ let lang=(()=>{
   try{const q=new URLSearchParams(location.search).get('lang');if(q in L)return q;const s=localStorage.getItem('lang');if(s in L)return s}catch{}
   return /^uz/i.test(navigator.language)?'uz':'ru';
 })();
-for(const [src,tx] of shots){
-  const b=document.createElement('button');b.className='shot';b.type='button';b._tx=tx;
-  b.innerHTML=`<img src="${src}" alt="" loading="lazy"><strong></strong><small></small>`;
-  b.onclick=()=>{const t=b.querySelector('strong').textContent;dlg.querySelector('img').src=src;dlg.querySelector('img').alt=t;dlg.querySelector('p').textContent=t;dlg.showModal()};
-  g.append(b);
+const I18N=[],tr=o=>o[lang]??o.ru;
+// el(): nodes are built once; their {ru,uz,en} text is re-applied on a language switch, so reveal state survives
+const el=(tag,cls,o,parent,fmt,attr)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(o)I18N.push([e,o,fmt,attr]);if(parent)parent.append(e);return e};
+function openViewer(src,t,q,k){const im=dlg.querySelector('img');im.src=src;im.alt=t;dlg.querySelector('.dt').textContent=t;dlg.querySelector('.dq').textContent=q;dlg.querySelector('.dk').innerHTML=li(k);dlg.showModal()}
+
+const nav=document.getElementById('topnav');
+X.nav.forEach(([h,o])=>{el('a',null,o,nav).href=h});
+const roles=document.getElementById('roles');
+X.roles.forEach(([id,o],i)=>{const b=el('button',null,o,roles);b.type='button';b.setAttribute('aria-pressed',i===0);
+  b.onclick=()=>{roles.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));g.querySelectorAll('.shot').forEach(s=>s.hidden=id!=='all'&&s.dataset.role!==id)}});
+for(const r of REPORTS){
+  const b=el('button','shot',null,g);b.type='button';b.dataset.role=r.role;
+  const im=el('img',null,r.name,b,t=>L[lang].alt(t),'alt');im.src='img/'+r.img;im.loading='lazy';
+  el('span','num',null,b).textContent=String(r.n).padStart(2,'0');
+  el('strong',null,r.name,b);el('small',null,r.q,b);el('div','kch',r.k,b,sp);
+  b.onclick=()=>openViewer('img/'+r.img,tr(r.name),tr(r.q),tr(r.k));
 }
+const mg=document.getElementById('mgrid');
+X.metrics.forEach((m,i)=>{const d=el('details','mg',null,mg);d.open=i<2;const s=el('summary',null,null,d);el('span',null,m.name,s);el('small',null,null,s).textContent=m.items.ru.length;
+  el('dl',null,m.items,d,a=>a.map(([n,x])=>`<div><dt>${n}</dt><dd>${x}</dd></div>`).join(''))});
+const flow=document.getElementById('flow');
+X.flow.forEach(([b,t])=>{const d=el('div',null,null,flow);el('b',null,b,d);el('span',null,t,d)});
+const sys=document.getElementById('sys');
+X.sys.forEach(([name,...v])=>{const c=el('article','sys',null,sys),h=el('h3',null,typeof name==='string'?null:name,c);if(typeof name==='string')h.textContent=name;
+  v.forEach((o,i)=>el('p',null,o,c,x=>`<b>${tr(X.sysLabels[i])}</b>${x}`))});
+const cols=document.getElementById('cols');
+[[X.secH,X.sec],[X.needH,X.need]].forEach(([h,l])=>{const d=el('div',null,null,cols);el('h3',null,h,d);el('ul','check',l,d,li)});
+const tl=document.getElementById('tl');
+X.tl.forEach(([n,t,w,dash])=>{const d=el('div',null,null,tl);el('span',null,n,d);el('i',dash?'dash':null,t,el('p',null,null,d)).style.width=w+'%'});
+const cmp=document.getElementById('cmp'),hr=el('tr',null,null,el('thead',null,null,cmp)),tb=el('tbody',null,null,cmp);
+X.cmpHead.forEach(o=>el('th',null,o,hr));
+X.cmp.forEach(([lab,...cells])=>{const r=el('tr',null,null,tb);el('td',null,lab,r);
+  cells.forEach(c=>{if(typeof c==='object')return el('td',null,c,r);const td=el('td',c==='y'||c==='n'?c:null,null,r);td.textContent=c==='y'?'✓':c==='n'?'—':c})});
+const terms=document.getElementById('terms');
+[[X.termsH,X.terms],[t3('Ещё важно','Yana muhim','Also good to know'),X.terms2]].forEach(([h,l])=>{const d=el('div',null,null,terms);el('h3',null,h,d);el('ul','check',l,d,li)});
+const fq=document.getElementById('faqs');
+X.faq.forEach(([q,a])=>{const d=el('details',null,null,fq);el('summary',null,q,d);el('p',null,a,d)});
 function applyTexts(){
   const d=T[lang]||{};
   document.querySelectorAll('[data-t]').forEach(e=>{e.innerHTML=d[e.dataset.t]??RU[e.dataset.t];if(e.classList.contains('track'))e.innerHTML=e.innerHTML.repeat(4)});
   document.querySelectorAll('[data-ta]').forEach(e=>e.alt=d[e.dataset.ta]??RU[e.dataset.ta]);
   document.querySelectorAll('.copy').forEach(b=>b.textContent=L[lang].copy);
-  g.querySelectorAll('.shot').forEach(b=>{const [t,x]=b._tx[lang];b.querySelector('strong').textContent=t;b.querySelector('small').textContent=x;b.querySelector('img').alt=L[lang].alt(t)});
+  I18N.forEach(([e,o,f,attr])=>{const v=f?f(tr(o)):tr(o);attr?e.setAttribute(attr,v):e.innerHTML=v});
   document.documentElement.lang=lang;document.querySelector('meta[name=description]').content=L[lang].desc;
   document.querySelectorAll('.lang button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===lang));
 }
 applyTexts();
 document.querySelector('.hero-shot img').style.cursor='zoom-in';
-document.querySelector('.hero-shot img').onclick=e=>{dlg.querySelector('img').src=e.target.src;dlg.querySelector('p').textContent=L[lang].hero;dlg.showModal()};
+document.querySelector('.hero-shot img').onclick=e=>openViewer(e.target.src,L[lang].hero,'',[]);
 dlg.onclick=()=>dlg.close();
 document.querySelectorAll('.copy').forEach(b=>b.onclick=async()=>{
   try{await navigator.clipboard.writeText(b.dataset.copy);b.textContent=L[lang].copied}
@@ -475,7 +776,7 @@ Promise.race([document.fonts.ready,new Promise(r=>setTimeout(r,1500))]).then(()=
 }));
 
 const show=el=>{if(el.classList.contains('in'))return;el.classList.add('in');el.classList.contains('kpi')&&countUp(el.querySelector('b'))};
-const rv=[...document.querySelectorAll('section h2, section > .terms, section > .note, .kpi, .shot, .all-pages, .pack, .steps li, .about > div')];
+const rv=[...document.querySelectorAll('section h2, section > .terms, section > .note, .kpi, .chips, .shot, .mg, .flow > div, .sys, .cols > div, .steps li, .tl, .pack, .cmp-wrap, .faq details, .about > div')];
 // anchor jumps skip elements without intersecting them, so reveal everything above the one that came into view
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)rv.slice(0,rv.indexOf(e.target)+1).forEach(show)}),{threshold:.15});
 rv.forEach(el=>{
@@ -522,5 +823,9 @@ function setLang(l){
   for(const el of heads)if(el.classList.contains('in')){el.classList.remove('in');void el.offsetWidth;el.classList.add('in')}
 }
 document.querySelectorAll('.lang button').forEach(b=>b.onclick=()=>setLang(b.dataset.lang));
+// highlight the section in view
+const navA=[...nav.querySelectorAll('a')];
+const sio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)navA.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id))}),{rootMargin:'-45% 0px -50% 0px'});
+X.nav.forEach(([h])=>sio.observe(document.querySelector(h)));
 </script>
 </body></html>
