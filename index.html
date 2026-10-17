@@ -79,6 +79,9 @@ section{display:grid;gap:24px;min-width:0}
 .meta{font:500 13px/1.3 var(--f-mono);color:var(--deep)}
 .pack ul{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--muted);font-size:15px}
 .terms{color:var(--muted);font-size:15px;max-width:70ch}
+.sv{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px;align-items:start}
+.tg{background:var(--chip);border:1px solid var(--line);border-radius:16px 16px 16px 4px;padding:14px 16px 22px;white-space:pre-wrap;overflow-wrap:anywhere;font-size:15px;line-height:1.5;position:relative;max-width:46ch}
+.tg time{position:absolute;right:12px;bottom:6px;font-size:12px;color:var(--muted)}
 
 /* process */
 .steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;counter-reset:s}
@@ -350,6 +353,27 @@ section > h2::before,.about > div:first-child > h2::before{counter-increment:sec
     <div class="tl" id="tl"></div>
   </section>
 
+  <section id="svodka" aria-labelledby="h-svodka">
+    <h2 id="h-svodka" data-t="hSvodka">Утренняя сводка в Telegram</h2>
+    <p class="terms" data-t="svIntro">Каждое утро руководитель получает одно короткое сообщение: сколько продали вчера, успеваем ли план месяца, кто из агентов отстаёт, кто давно не платит и какой товар заканчивается. Открывать отчёт не нужно.</p>
+    <div class="sv">
+      <div class="tg"><b>☀️ Сводка за 7 октября</b>
+Продажи: <b>99,1 млн</b> — 121% плана дня, +7% к прошлой неделе
+Месяц: 22% плана, прошло 6 из 27 раб. дней → идём к <b>97%</b>
+⚠️ Отстают: Жасур Султонов 89%
+💰 Долг без оплаты 30+ дней: <b>36,9 млн</b> (клиентов: 31)
+     крупнейший — Магазин «Камалак» №110, 7,0 млн, 111 дн.
+🚶 Визиты: 204, с заказом 42%<time>08:00</time></div>
+      <article class="pack">
+        <h3 data-t="svName">Сводка</h3>
+        <p class="price" data-t="svPrice">100 <small>USD подключение</small></p>
+        <p class="meta" data-t="svMeta">+ 50 USD в месяц · запуск за 2–3 дня</p>
+        <ul data-t="svUl"><li>Работает и без Power BI</li><li>SmartUp, Linko, Sales Doctor или 1С</li><li>Если данные из системы не пришли, сводка так и напишет, а не покажет ноль</li><li>Одно сообщение в день, без повторов</li></ul>
+      </article>
+    </div>
+    <p class="note" data-t="svNote">Пример на демо-данных. Абонентская плата только за сводку: она держит её в работе и правит, если меняется ваша система.</p>
+  </section>
+
   <section id="prices" aria-labelledby="h-packs">
     <h2 id="h-packs" data-t="hPacks">Пакеты и цены</h2>
     <p class="terms" data-t="packsIntro">Одна фиксированная цена за проект. Абонентской платы нет, отчёты и обновление остаются вашими.</p>
@@ -463,7 +487,7 @@ const REPORTS=[
   k:t3(['Раскладка продаж в один клик','Филиал, канал, категория, бренд, агент, сегмент'],['Sotuvni bir klikda yoyish','Filial, kanal, kategoriya, brend, agent, segment'],['One-click breakdown of sales','Branch, channel, category, brand, agent, segment'])}
 ];
 const X={
- nav:[['#reports',t3('Отчёты','Hisobotlar','Reports')],['#metrics',t3('Показатели','Koʻrsatkichlar','Metrics')],['#connect',t3('Подключение','Ulanish','Connection')],['#process',t3('Сроки','Muddatlar','Timeline')],['#prices',t3('Цены','Narxlar','Prices')],['#faq',t3('Вопросы','Savollar','FAQ')]],
+ nav:[['#reports',t3('Отчёты','Hisobotlar','Reports')],['#metrics',t3('Показатели','Koʻrsatkichlar','Metrics')],['#connect',t3('Подключение','Ulanish','Connection')],['#process',t3('Сроки','Muddatlar','Timeline')],['#svodka',t3('Сводка','Svodka','Brief')],['#prices',t3('Цены','Narxlar','Prices')],['#faq',t3('Вопросы','Savollar','FAQ')]],
  roles:[['all',t3('Все 18','Hammasi 18','All 18')],['boss',t3('Руководителю','Rahbarga','Management')],['agents',t3('Агенты и визиты','Agentlar va tashriflar','Agents & visits')],['clients',t3('Клиенты','Mijozlar','Customers')],['fin',t3('Склад и финансы','Ombor va moliya','Stock & finance')]],
  metrics:[
   {name:t3('Продажи','Sotuv','Sales'),items:t3([
@@ -618,6 +642,11 @@ const T={
   note2:'Raqamlar demo hisobotdan, soʻmda.',
   hReports:'Rahbar oladigan hisobotlar',
   fullSet:'18 ta maʼlumotli sahifa va oʻtish tugmalari bor «Mundarija» sahifasi, hammasi bitta Power BI faylida. Har bir sahifada yil, oy va filial boʻyicha filtrlar. Hisobotni kattaroq koʻrish uchun ustiga bosing.',
+  hSvodka:'Telegramʼda ertalabki svodka',
+  svIntro:'Har kuni ertalab rahbar bitta qisqa xabar oladi: kecha qancha sotildi, oylik reja ulguriladimi, qaysi agent orqada, kim uzoq vaqt toʻlamayapti va qaysi tovar tugayapti. Hisobotni ochish shart emas.',
+  svName:'Svodka',svPrice:'100 <small>USD ulash</small>',svMeta:'+ oyiga 50 USD · 2–3 kunda ishga tushadi',
+  svUl:li(['Power BIʼsiz ham ishlaydi','SmartUp, Linko, Sales Doctor yoki 1C','Tizimdan maʼlumot kelmasa, svodka nol koʻrsatmaydi, shuni yozadi','Kuniga bitta xabar, takrorsiz']),
+  svNote:'Namuna demo maʼlumotlarda. Oylik toʻlov faqat svodka uchun: u svodkani ishlatib turadi va tizimingiz oʻzgarsa tuzatadi.',
   hPacks:'Paketlar va narxlar',
   packsIntro:'Loyiha uchun bitta qatʼiy narx. Oylik toʻlov yoʻq, hisobotlar va yangilanish sizda qoladi.',
   pn1:'Start',pn2:'Biznes',pn3:'Toʻliq yechim',
@@ -659,6 +688,11 @@ const T={
   note2:'Figures from the demo report, in UZS.',
   hReports:'Reports your management gets',
   fullSet:'18 data pages plus a Contents page with navigation buttons, all in one Power BI file. Every page filters by year, month and branch. Click a report to see it large.',
+  hSvodka:'Morning brief in Telegram',
+  svIntro:'Every morning the boss gets one short message: yesterday’s sales, whether the month’s plan is on track, which agents are behind, who hasn’t paid for a while and what is running out of stock. No need to open a report.',
+  svName:'Brief',svPrice:'100 <small>USD setup</small>',svMeta:'+ 50 USD a month · live in 2–3 days',
+  svUl:li(['Works without Power BI','SmartUp, Linko, Sales Doctor or 1C','If data from your system didn’t arrive, the brief says so instead of showing zero','One message a day, never duplicated']),
+  svNote:'Sample on demo data. The monthly fee covers the brief only: it keeps it running and fixes it if your system changes.',
   hPacks:'Packages and prices',
   packsIntro:'One fixed price per project. No subscription: the reports and the daily refresh stay yours.',
   pn1:'Start',pn2:'Business',pn3:'Turnkey',
