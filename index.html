@@ -79,6 +79,7 @@ section{display:grid;gap:24px;min-width:0}
 .meta{font:500 13px/1.3 var(--f-mono);color:var(--deep)}
 .pack ul{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--muted);font-size:15px}
 .terms{color:var(--muted);font-size:15px;max-width:70ch}
+.sub{margin:44px 0 0;font:600 21px/1.3 var(--f-body)}
 .sv{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px;align-items:start}
 .tg{background:var(--chip);border:1px solid var(--line);border-radius:16px 16px 16px 4px;padding:14px 16px 22px;white-space:pre-wrap;overflow-wrap:anywhere;font-size:15px;line-height:1.5;position:relative;max-width:46ch}
 .tg time{position:absolute;right:12px;bottom:6px;font-size:12px;color:var(--muted)}
@@ -372,6 +373,39 @@ section > h2::before,.about > div:first-child > h2::before{counter-increment:sec
       </article>
     </div>
     <p class="note" data-t="svNote">Пример на демо-данных. Абонентская плата только за сводку: она держит её в работе и правит, если меняется ваша система.</p>
+
+    <h3 class="sub" data-t="hAi">ИИ-аналитик: не только цифры, но и что делать</h3>
+    <p class="terms" data-t="aiIntro">Сводка показывает цифры. ИИ-аналитик их читает: находит причину, называет конкретного агента и клиента и пишет задания на сегодня — вам, супервайзеру и агентам. Помнит вчерашние поручения: если долг так и не оплачен, напишет «уже третий день» и передаст задачу выше. По понедельникам — обзор недели: филиалы, лучшие и слабые агенты, клиенты, товары, деньги и три приоритета.</p>
+    <div class="sv">
+      <div class="tg"><b>📅 5 октября</b> · 93,2 млн · 113% плана дня
+<i>Темп месяца — 94% плана. Ташкент тянет вниз.</i>
+━━━━━━━━━━
+<b>Что важно</b>
+
+🔴 <b>Ташкент — прогноз 84%</b>: у Сардора Норматова два постоянных клиента не заказывают 14 и 31 день
+
+🔴 <b>«Достон Маркет» №83</b>: не платит 20 дней, но ему снова отгрузили — долг вырос до 19,6 млн
+
+🟢 <b>«Омад Маркет» №5 оплатил</b>, долг 30+ дней снизился с 45,0 до 39,4 млн
+━━━━━━━━━━
+<b>Что сделать сегодня</b>
+
+👤 <b>Вам лично</b>
+→ запретить отгрузки «Достон Маркет» №83 до оплаты
+
+👥 <b>Супервайзер</b>
+→ съездить с Сардором Норматовым к двум клиентам
+
+🚶 <b>Агенты</b>
+→ Фаррух Юсупов: к обеду назвать дату оплаты<time>08:00</time></div>
+      <article class="pack">
+        <h3 data-t="aiName">ИИ-аналитик</h3>
+        <p class="price" data-t="aiPrice">200 <small>USD подключение</small></p>
+        <p class="meta" data-t="aiMeta">+ 80 USD в месяц · запуск за 3–5 дней</p>
+        <ul data-t="aiUl"><li>Причина каждой проблемы и задания с именами</li><li>Помнит вчерашние поручения и проверяет, выполнены ли они</li><li>Обзор недели каждый понедельник</li><li>Каждую фамилию и сумму сверяет с вашими данными, ничего не придумывает</li><li>Первые 2 недели настраиваю под ваш стиль: что важно, что убрать</li></ul>
+      </article>
+    </div>
+    <p class="note" data-t="aiNote">Пример на демо-данных. Включает утреннюю сводку. Абонентская плата держит аналитика в работе и настраивает его под ваши замечания.</p>
   </section>
 
   <section id="prices" aria-labelledby="h-packs">
@@ -647,6 +681,11 @@ const T={
   svName:'Svodka',svPrice:'100 <small>USD ulash</small>',svMeta:'+ oyiga 50 USD · 2–3 kunda ishga tushadi',
   svUl:li(['Power BIʼsiz ham ishlaydi','SmartUp, Linko, Sales Doctor yoki 1C','Tizimdan maʼlumot kelmasa, svodka nol koʻrsatmaydi, shuni yozadi','Kuniga bitta xabar, takrorsiz']),
   svNote:'Namuna demo maʼlumotlarda. Oylik toʻlov faqat svodka uchun: u svodkani ishlatib turadi va tizimingiz oʻzgarsa tuzatadi.',
+  hAi:'SI-tahlilchi: faqat raqam emas, nima qilish kerakligi ham',
+  aiIntro:'Svodka raqamlarni koʻrsatadi. SI-tahlilchi ularni oʻqiydi: sababini topadi, aniq agent va mijozni aytadi, bugungi topshiriqlarni yozadi — sizga, supervayzerga va agentlarga. Kechagi topshiriqlarni eslaydi: qarz toʻlanmagan boʻlsa, «uchinchi kun» deb yozadi va vazifani yuqoriga oʻtkazadi. Dushanba kunlari — hafta sharhi: filiallar, eng yaxshi va zaif agentlar, mijozlar, tovarlar, pul va uchta ustuvor ish.',
+  aiName:'SI-tahlilchi',aiPrice:'200 <small>USD ulash</small>',aiMeta:'+ oyiga 80 USD · 3–5 kunda ishga tushadi',
+  aiUl:li(['Har bir muammoning sababi va ismli topshiriqlar','Kechagi topshiriqlarni eslaydi va bajarilganini tekshiradi','Har dushanba hafta sharhi','Har bir familiya va summani maʼlumotingiz bilan solishtiradi, hech narsa toʻqimaydi','Birinchi 2 hafta uslubingizga moslayman: nima muhim, nimani olib tashlash kerak']),
+  aiNote:'Namuna demo maʼlumotlarda. Ertalabki svodka ichida. Oylik toʻlov tahlilchini ishlatib turadi va izohlaringizga moslaydi.',
   hPacks:'Paketlar va narxlar',
   packsIntro:'Loyiha uchun bitta qatʼiy narx. Oylik toʻlov yoʻq, hisobotlar va yangilanish sizda qoladi.',
   pn1:'Start',pn2:'Biznes',pn3:'Toʻliq yechim',
@@ -693,6 +732,11 @@ const T={
   svName:'Brief',svPrice:'100 <small>USD setup</small>',svMeta:'+ 50 USD a month · live in 2–3 days',
   svUl:li(['Works without Power BI','SmartUp, Linko, Sales Doctor or 1C','If data from your system didn’t arrive, the brief says so instead of showing zero','One message a day, never duplicated']),
   svNote:'Sample on demo data. The monthly fee covers the brief only: it keeps it running and fixes it if your system changes.',
+  hAi:'AI analyst: not just numbers, but what to do',
+  aiIntro:'The brief shows numbers. The AI analyst reads them: finds the cause, names the agent and the client, and writes today’s tasks — for you, the supervisor and the agents. It remembers yesterday’s tasks: if a debt is still unpaid, it says “third day now” and escalates. Every Monday — a weekly review: branches, best and weakest agents, clients, products, money and three priorities.',
+  aiName:'AI analyst',aiPrice:'200 <small>USD setup</small>',aiMeta:'+ 80 USD a month · live in 3–5 days',
+  aiUl:li(['The cause of every problem and tasks with names','Remembers yesterday’s tasks and checks whether they were done','Weekly review every Monday','Checks every name and amount against your data, never makes things up','First 2 weeks I tune it to your style: what matters, what to drop']),
+  aiNote:'Sample on demo data. Includes the morning brief. The monthly fee keeps the analyst running and tunes it to your feedback.',
   hPacks:'Packages and prices',
   packsIntro:'One fixed price per project. No subscription: the reports and the daily refresh stay yours.',
   pn1:'Start',pn2:'Business',pn3:'Turnkey',
