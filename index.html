@@ -278,6 +278,10 @@ section > h2::before,.about > div:first-child > h2::before{counter-increment:sec
   .js .steps li.rv{background-size:100% 2px}
   .bg i,.hero-shot,.hero-shot::after,.btn-main::after,.pack.hot,.contact{animation:none!important}
 }
+.how-link{margin:18px 0 0}
+.how-link a{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:10px;border:1px solid var(--line);background:var(--paper);color:var(--ink);text-decoration:none;font:600 15px/1 var(--f-body);transition:border-color .25s,color .25s}
+.how-link a:hover{border-color:var(--accent);color:var(--accent)}
+.how-link a:focus-visible{outline:2px solid var(--deep);outline-offset:2px}
 </style>
 </head><body>
 
@@ -338,6 +342,7 @@ section > h2::before,.about > div:first-child > h2::before{counter-increment:sec
     <h2 id="h-connect" data-t="hConnect">Как подключается</h2>
     <p class="terms" data-t="connectIntro">Ничего не нужно выгружать руками. Каждое утро данные сами идут из вашей системы в базу на вашем компьютере, а Power BI обновляется из неё.</p>
     <div class="flow" id="flow"></div>
+    <p class="how-link"><a href="how.html" data-t="howLink">Посмотреть, как это работает →</a></p>
     <div class="sys-grid" id="sys"></div>
     <p class="note" data-t="sysNote">Несколько систем можно подключить в одну базу, например SmartUp и 1С.</p>
     <div class="cols" id="cols"></div>
@@ -663,6 +668,7 @@ const T={
   metricsIntro:'Har bir koʻrsatkich barcha sahifalarda bir xil hisoblanadi. Sotuv faqat yetkazilgan buyurtmalar boʻyicha, qaytarishlar ayiriladi.',
   metricsNote:'Shuningdek yordamchi hisoblar: ish kunlari, oxirgi xarid va toʻlov sanalari, koordinatalar.',
   hConnect:'Qanday ulanadi',
+  howLink:'Qanday ishlashini koʻrish →',
   connectIntro:'Qoʻlda hech narsa yuklash shart emas. Har kuni ertalab maʼlumotlar tizimingizdan kompyuteringizdagi bazaga oʻzi oʻtadi, Power BI esa undan yangilanadi.',
   sysNote:'Bir nechta tizimni bitta bazaga ulash mumkin, masalan SmartUp va 1C.',
   hFaq:'Koʻp beriladigan savollar',
@@ -713,6 +719,7 @@ const T={
   metricsIntro:'Every metric is calculated the same way on every page. Sales count delivered orders only, with returns subtracted.',
   metricsNote:'Plus helper calculations: working days, last purchase and payment dates, coordinates.',
   hConnect:'How it connects',
+  howLink:'See how it works →',
   connectIntro:'Nothing has to be exported by hand. Every morning the data moves from your system into a database on your own computer, and Power BI refreshes from it.',
   sysNote:'Several systems can feed one database, for example SmartUp plus 1C.',
   hFaq:'Frequently asked questions',
@@ -813,6 +820,7 @@ function applyTexts(){
   I18N.forEach(([e,o,f,attr])=>{const v=f?f(tr(o)):tr(o);attr?e.setAttribute(attr,v):e.innerHTML=v});
   document.documentElement.lang=lang;document.querySelector('meta[name=description]').content=L[lang].desc;
   document.querySelectorAll('.lang button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===lang));
+  document.querySelectorAll('a[href^="how.html"]').forEach(a=>a.href='how.html?lang='+lang);
 }
 applyTexts();
 document.querySelector('.hero-shot img').style.cursor='zoom-in';
