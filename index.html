@@ -332,7 +332,7 @@ section > h2::before,.about > div:first-child > h2::before{counter-increment:sec
   </section>
 
   <section id="metrics" aria-labelledby="h-metrics">
-    <h2 id="h-metrics" data-t="hMetrics">64 показателя внутри</h2>
+    <h2 id="h-metrics" data-t="hMetrics">71 показатель внутри</h2>
     <p class="terms" data-t="metricsIntro">Каждый показатель считается одинаково на всех страницах. Продажи считаются только по доставленным заказам, возвраты вычитаются.</p>
     <div class="mgrid" id="mgrid"></div>
     <p class="note" data-t="metricsNote">Плюс служебные расчёты: рабочие дни, даты последней покупки и оплаты, координаты.</p>
@@ -531,11 +531,11 @@ const X={
  roles:[['all',t3('Все 18','Hammasi 18','All 18')],['boss',t3('Руководителю','Rahbarga','Management')],['agents',t3('Агенты и визиты','Agentlar va tashriflar','Agents & visits')],['clients',t3('Клиенты','Mijozlar','Customers')],['fin',t3('Склад и финансы','Ombor va moliya','Stock & finance')]],
  metrics:[
   {name:t3('Продажи','Sotuv','Sales'),items:t3([
-    ['Чистые продажи','Продажи за вычетом возвратов.'],['Валовые продажи, Скидки, Скидка %','Продажи до скидки и сколько ушло на скидки.'],['Возвраты и доля возвратов %','Сколько вернули и какая это часть продаж.'],['Количество, шт · Заказы','Сколько продано штук и сколько было заказов.'],['Средний чек · Средняя цена','Сколько в среднем стоит заказ и единица товара.'],['SKU продано · SKU в заказе','Насколько широкий ассортимент покупают.'],['Нумерическая дистрибуция %','Какая доля активных точек покупает бренд или товар.'],['Доля в продажах %','Вклад каждой строки в общий итог.'],['Продажи прошлый год · Рост %','Сравнение с тем же периодом прошлого года.'],['Продажи с начала года · Рост с начала года %','Итог с января и сравнение с прошлым годом.']
+    ['Чистые продажи','Продажи за вычетом возвратов.'],['Валовые продажи, Скидки, Скидка %','Продажи до скидки и сколько ушло на скидки.'],['Возвраты и доля возвратов %','Сколько вернули и какая это часть продаж.'],['Количество, шт · Заказы','Сколько продано штук и сколько было заказов.'],['Средний чек · Средняя цена','Сколько в среднем стоит заказ и единица товара.'],['SKU продано · SKU в заказе','Насколько широкий ассортимент покупают.'],['Нумерическая дистрибуция %','Какая доля активных точек покупает бренд или товар.'],['Доля в продажах %','Вклад каждой строки в общий итог.'],['Продажи прошлый год · Рост %','Сравнение с тем же периодом прошлого года. Текущий месяц — на то же число рабочих дней.'],['Продажи прошлый месяц · Рост %','Сравнение с прошлым месяцем на то же число рабочих дней.'],['Продажи с начала года · Рост с начала года %','Итог с января и сравнение с прошлым годом.']
    ],[
-    ['Sof sotuv','Qaytarishlar chegirilgan sotuv.'],['Yalpi sotuv, chegirmalar, chegirma %','Chegirmagacha sotuv va chegirmalarga qancha ketgani.'],['Qaytarishlar va ulushi %','Qancha qaytdi va bu sotuvning qancha qismi.'],['Miqdor, dona · Buyurtmalar','Qancha dona sotildi va nechta buyurtma boʻldi.'],['Oʻrtacha chek · Oʻrtacha narx','Buyurtma va bir dona tovar oʻrtacha qancha turadi.'],['Sotilgan SKU · Buyurtmadagi SKU','Assortiment qanchalik keng olinyapti.'],['Numerik distributsiya %','Faol nuqtalarning qancha qismi brend yoki tovarni oladi.'],['Sotuvdagi ulush %','Har bir qatorning umumiy natijadagi hissasi.'],['Oʻtgan yil sotuvi · Oʻsish %','Oʻtgan yilning shu davri bilan solishtirish.'],['Yil boshidan sotuv · Oʻsish %','Yanvardan beri natija va oʻtgan yil bilan solishtirish.']
+    ['Sof sotuv','Qaytarishlar chegirilgan sotuv.'],['Yalpi sotuv, chegirmalar, chegirma %','Chegirmagacha sotuv va chegirmalarga qancha ketgani.'],['Qaytarishlar va ulushi %','Qancha qaytdi va bu sotuvning qancha qismi.'],['Miqdor, dona · Buyurtmalar','Qancha dona sotildi va nechta buyurtma boʻldi.'],['Oʻrtacha chek · Oʻrtacha narx','Buyurtma va bir dona tovar oʻrtacha qancha turadi.'],['Sotilgan SKU · Buyurtmadagi SKU','Assortiment qanchalik keng olinyapti.'],['Numerik distributsiya %','Faol nuqtalarning qancha qismi brend yoki tovarni oladi.'],['Sotuvdagi ulush %','Har bir qatorning umumiy natijadagi hissasi.'],['Oʻtgan yil sotuvi · Oʻsish %','Oʻtgan yilning shu davri bilan solishtirish. Joriy oy — shuncha ish kuni bilan.'],['Oʻtgan oy sotuvi · Oʻsish %','Oʻtgan oyning shuncha ish kuni bilan solishtirish.'],['Yil boshidan sotuv · Oʻsish %','Yanvardan beri natija va oʻtgan yil bilan solishtirish.']
    ],[
-    ['Net sales','Sales minus returns.'],['Gross sales, discounts, discount %','Sales before discount and how much went on discounts.'],['Returns and return share %','How much came back and what share of sales it is.'],['Units · Orders','How many units were sold and how many orders there were.'],['Average order · Average price','What an order and a unit cost on average.'],['SKUs sold · SKUs per order','How wide a range customers buy.'],['Numeric distribution %','What share of active outlets buys the brand or item.'],['Share of sales %','Each row’s contribution to the total.'],['Last year sales · Growth %','Comparison with the same period last year.'],['YTD sales · YTD growth %','The total since January compared with last year.']
+    ['Net sales','Sales minus returns.'],['Gross sales, discounts, discount %','Sales before discount and how much went on discounts.'],['Returns and return share %','How much came back and what share of sales it is.'],['Units · Orders','How many units were sold and how many orders there were.'],['Average order · Average price','What an order and a unit cost on average.'],['SKUs sold · SKUs per order','How wide a range customers buy.'],['Numeric distribution %','What share of active outlets buys the brand or item.'],['Share of sales %','Each row’s contribution to the total.'],['Last year sales · Growth %','Comparison with the same period last year. The current month is compared on the same number of working days.'],['Last month sales · Growth %','Comparison with last month on the same number of working days.'],['YTD sales · YTD growth %','The total since January compared with last year.']
    ])},
   {name:t3('План и ежедневный контроль','Reja va kunlik nazorat','Plan and daily control'),items:t3([
     ['План продаж','План по каждому агенту на месяц.'],['Выполнение плана % · Отклонение от плана','Насколько выполнен план и сколько не хватает.'],['Продажи в день','Средний темп продаж за рабочий день.'],['Прогноз продаж · Прогноз выполнения %','Каким будет месяц, если продавать в том же темпе.'],['Нужно продавать в день','Сколько продавать каждый день, чтобы закрыть план.'],['Осталось рабочих дней','Сколько рабочих дней до конца месяца.']
@@ -559,11 +559,11 @@ const X={
     ['Visits · Visits with an order','All agent visits and those that ended in an order.'],['Visit strike rate %','What share of visits ended in an order.'],['Visits per agent per day','Average agent workload.'],['On-route visits %','What share of visits followed the route.'],['Average visit length','How many minutes an agent spends at an outlet.']
    ])},
   {name:t3('Дебиторка и оплаты','Debitorlik va toʻlovlar','Receivables and payments'),items:t3([
-    ['Сумма оплат','Оплаты клиентов за период.'],['Дебиторка','Сколько клиенты должны на конец периода.'],['Долг без оплаты больше месяца','Долг клиентов, которые давно не платили.'],['Клиентов с долгом','Сколько клиентов должны.'],['Давность оплаты','Долги по сроку с последней оплаты.']
+    ['Сумма оплат','Оплаты клиентов за период.'],['Дебиторка','Сколько клиенты должны на конец периода, включая долг до подключения.'],['Долг без оплаты больше месяца','Долг клиентов, которые давно не платили.'],['Клиентов с долгом','Сколько клиентов должны.'],['Давность оплаты','Долги по сроку с последней оплаты.']
    ],[
-    ['Toʻlovlar summasi','Davr ichidagi mijoz toʻlovlari.'],['Debitorlik','Davr oxirida mijozlar qancha qarzdor.'],['Bir oydan ortiq toʻlanmagan qarz','Uzoq vaqt toʻlamagan mijozlar qarzi.'],['Qarzdor mijozlar','Nechta mijoz qarzdor.'],['Toʻlov muddati','Oxirgi toʻlovdan beri oʻtgan vaqt boʻyicha qarzlar.']
+    ['Toʻlovlar summasi','Davr ichidagi mijoz toʻlovlari.'],['Debitorlik','Davr oxirida mijozlar qancha qarzdor, ulanishdan oldingi qarz bilan.'],['Bir oydan ortiq toʻlanmagan qarz','Uzoq vaqt toʻlamagan mijozlar qarzi.'],['Qarzdor mijozlar','Nechta mijoz qarzdor.'],['Toʻlov muddati','Oxirgi toʻlovdan beri oʻtgan vaqt boʻyicha qarzlar.']
    ],[
-    ['Payments','Customer payments in the period.'],['Receivables','How much customers owe at the end of the period.'],['Debt unpaid for over a month','Debt of customers who haven’t paid for a long time.'],['Customers with debt','How many customers owe.'],['Payment age','Debts grouped by time since the last payment.']
+    ['Payments','Customer payments in the period.'],['Receivables','How much customers owe at the end of the period, including debt from before go-live.'],['Debt unpaid for over a month','Debt of customers who haven’t paid for a long time.'],['Customers with debt','How many customers owe.'],['Payment age','Debts grouped by time since the last payment.']
    ])},
   {name:t3('Склад','Ombor','Stock'),items:t3([
     ['Остаток в штуках и в деньгах','Сколько товара на складе.'],['Дней запаса','На сколько дней хватит остатка.'],['SKU без остатка','Сколько позиций закончилось.'],['Скоро закончится','Товары, которых осталось на несколько дней.'],['Лежит слишком долго','Товары, которые не продаются.']
@@ -664,7 +664,7 @@ const li=a=>a.map(x=>`<li>${x}</li>`).join(''),sp=a=>a.map(x=>`<span>${x}</span>
 const step=(b,t)=>`<b>${b}</b><span>${t}</span>`;
 const T={
  uz:{
-  hMetrics:'Ichidagi 64 koʻrsatkich',
+  hMetrics:'Ichidagi 71 koʻrsatkich',
   metricsIntro:'Har bir koʻrsatkich barcha sahifalarda bir xil hisoblanadi. Sotuv faqat yetkazilgan buyurtmalar boʻyicha, qaytarishlar ayiriladi.',
   metricsNote:'Shuningdek yordamchi hisoblar: ish kunlari, oxirgi xarid va toʻlov sanalari, koordinatalar.',
   hConnect:'Qanday ulanadi',
@@ -715,7 +715,7 @@ const T={
   auditP:'Qaysi tizimdan foydalanishingizni yozing, uchrashuv vaqtini kelishib olamiz.'
  },
  en:{
-  hMetrics:'64 metrics inside',
+  hMetrics:'71 metrics inside',
   metricsIntro:'Every metric is calculated the same way on every page. Sales count delivered orders only, with returns subtracted.',
   metricsNote:'Plus helper calculations: working days, last purchase and payment dates, coordinates.',
   hConnect:'How it connects',
