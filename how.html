@@ -2,7 +2,7 @@
 <title>Путь данных · Distrib BI</title>
 <meta name="description" content="Каждое утро за кадром проходят пять шагов: данные забираются из учётной системы, проверяются, ложатся в базу, попадают в отчёт, и в конце приходит сообщение. В этой машинке каждая деталь — часть настоящего процесса.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
 .iso{
   --anatomy-page:#0b0b0b;--anatomy-card:#131313;--anatomy-text:#a3a3a3;--anatomy-strong:#e6e6e6;--anatomy-muted:#6e6e6e;
@@ -110,47 +110,15 @@
 .iso-swatch-crease{stroke:var(--anatomy-lo)!important}
 @media (max-width:560px){.iso-plate{padding:48px 12px 70px}.iso-plate-corner[data-corner="hint"]{bottom:18px}}
 @media (prefers-reduced-motion:reduce){.iso-line[data-flow],.iso-dots circle[data-pulse]{animation:none}}
-
-.iso{--anatomy-page:#10151d;--anatomy-card:#171e29;--anatomy-text:#b9c2cf;--anatomy-strong:#e7ebf1;--anatomy-muted:#9aa5b5;
-  --anatomy-paper:#171e29;--anatomy-face:#1f2835;--anatomy-top:#222c3a;
-  --anatomy-shade-0:#121821;--anatomy-shade-1:#151c26;--anatomy-shade-2:#19212c;--anatomy-shade-3:#1c2531;
-  --anatomy-lit-top:#3b2d12;--anatomy-lit-shade:#2d230f;
-  --anatomy-hi:#dce2ea;--anatomy-mid:#6c7a92;--anatomy-lo:#455169;--anatomy-faint:#2c3747;--anatomy-lit:#f0a830;
-  --anatomy-halo:#04070b;--anatomy-dot:#e7ebf1;--anatomy-mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
-  --acc:#f0a830;--acc-ink:#15110a;--line:#2a3443}
-.iso[data-theme="light"]{--anatomy-page:#f5f6f8;--anatomy-card:#ffffff;--anatomy-text:#3f4a5c;--anatomy-strong:#17202e;--anatomy-muted:#5a6475;
-  --anatomy-paper:#ffffff;--anatomy-face:#ffffff;--anatomy-top:#ffffff;
-  --anatomy-shade-0:#d3d9e3;--anatomy-shade-1:#dee3ea;--anatomy-shade-2:#e8ebf0;--anatomy-shade-3:#f1f3f7;
-  --anatomy-lit-top:#fff3dc;--anatomy-lit-shade:#f8dfae;
-  --anatomy-hi:#17202e;--anatomy-mid:#7d889b;--anatomy-lo:#aeb7c5;--anatomy-faint:#d5dbe3;--anatomy-lit:#c47a06;
-  --anatomy-halo:#4a5a75;--anatomy-halo-opacity:.26;--anatomy-dot:#2a3547;
-  --acc:#d98a0b;--acc-ink:#ffffff;--line:#dde1e8}
-*{box-sizing:border-box}
-html{color-scheme:light dark}
-body{margin:0;padding:0 16px;background:var(--anatomy-page);color:var(--anatomy-text);font:400 16px/1.6 "Golos Text",system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
-.page{width:min(900px,100%);margin:0 auto;padding:76px 0 88px}
-.back{display:inline-block;margin-bottom:30px;color:var(--anatomy-muted);font:500 14px/1 "Golos Text",sans-serif;text-decoration:none}
-.back:hover{color:var(--anatomy-strong)}
-.iso .etl-kicker{color:var(--acc);letter-spacing:.12em}
-.etl-head h1{font-family:"Unbounded","Golos Text",system-ui,sans-serif;font-weight:700;font-size:clamp(26px,4.6vw,40px);line-height:1.15;text-wrap:balance}
-.etl-head p{font-size:clamp(16px,2vw,18px);color:var(--anatomy-muted)}
-.etl-notes h2{font-family:"Unbounded","Golos Text",system-ui,sans-serif;font-weight:700;font-size:clamp(20px,3vw,26px)}
-.iso-plate{border-radius:14px;box-shadow:0 0 0 1px var(--line)}
-.etl-steps li{border-radius:0 10px 10px 0}
-.iso .etl-steps li.on{border-left-color:var(--acc)}
-.iso .etl-steps li.on .etl-n{color:var(--acc)}
-.etl-stats{border-radius:12px;overflow:hidden;background:var(--line);box-shadow:0 0 0 1px var(--line)}
-.lang{position:fixed;top:12px;right:12px;z-index:5;display:flex;gap:2px;padding:3px;border-radius:999px;border:1px solid var(--line);background:color-mix(in srgb,var(--anatomy-card) 80%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
-.lang button{font:500 12px/1 "JetBrains Mono",ui-monospace,monospace;padding:8px 10px;border:0;border-radius:999px;background:none;color:var(--anatomy-muted);cursor:pointer}
-.lang button[aria-pressed="true"]{background:var(--acc);color:var(--acc-ink)}
-.lang button:focus-visible,.btn:focus-visible,.back:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
-.cta-row{margin:40px 0 0}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 20px;border-radius:10px;font:600 15px/1 "Golos Text",sans-serif;text-decoration:none}
-.btn-main{background:var(--acc);color:var(--acc-ink)}
 </style></head>
-<body class="iso" data-theme="light"><script>(()=>{const m=matchMedia("(prefers-color-scheme: dark)"),set=()=>m.matches?document.body.removeAttribute("data-theme"):document.body.setAttribute("data-theme","light");set();m.addEventListener("change",set)})()</script>
-<nav class="lang" aria-label="Til / Язык / Language"><button type="button" data-lang="uz" lang="uz">UZ</button><button type="button" data-lang="ru" lang="ru">RU</button><button type="button" data-lang="en" lang="en">EN</button></nav>
-<main class="page"><a class="back" href="./" data-back data-l="back">← На главную</a>
+<body class="iso">
+<header class="bar"><div class="bar-in">
+  <a class="logo" href="./" data-back aria-label="Distrib BI"><svg viewBox="0 0 44 44" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#55555f"/><stop offset="1" stop-color="#1c1c22"/></linearGradient></defs><rect x="1" y="1" width="42" height="42" rx="11" fill="url(#lg)" stroke="rgba(255,255,255,.18)"/><rect x="11" y="23" width="5" height="10" rx="2" fill="#fff"/><rect x="19.5" y="16" width="5" height="17" rx="2" fill="#fff"/><rect x="28" y="10" width="5" height="23" rx="2" fill="#3f6ee8"/></svg><span>Distrib<sup>BI</sup></span></a>
+  <nav class="crumbs" aria-label="Навигация"><a href="./" data-back data-l="back">← На главную</a><span class="sep" aria-hidden="true">/</span><span class="cur" data-l="title">Путь данных</span></nav>
+  <nav class="lang" aria-label="Til / Язык / Language"><button type="button" data-lang="uz" lang="uz">UZ</button><button type="button" data-lang="ru" lang="ru">RU</button><button type="button" data-lang="en" lang="en">EN</button></nav>
+  <div class="bar-cta"><a class="btn btn-main" href="https://t.me/sabrvaxarakat" data-l="cta">Написать в Telegram</a></div>
+</div></header>
+<main class="page">
 
 <style>
 .etl-head{margin:0 0 28px}
@@ -192,8 +160,96 @@ body{margin:0;padding:0 16px;background:var(--anatomy-page);color:var(--anatomy-
   </div>
   <p class="etl-foot" data-l="foot">Цифры условные, для примера. Огоньки на шкафу показывают, что уже сохранено сегодня, экран Power BI — объём данных.</p>
 </section>
-<p class="cta-row"><a class="btn btn-main" href="https://t.me/sabrvaxarakat" data-l="cta">Написать в Telegram</a></p>
+<style>
+body.iso{
+  --anatomy-page:#0d0d10;--anatomy-card:#14151b;--anatomy-text:rgba(255,255,255,.74);--anatomy-strong:#ffffff;--anatomy-muted:rgba(255,255,255,.58);
+  --anatomy-paper:#14151b;--anatomy-face:#1e2029;--anatomy-top:#252834;
+  --anatomy-shade-0:#101116;--anatomy-shade-1:#13151b;--anatomy-shade-2:#171921;--anatomy-shade-3:#1b1e27;
+  --anatomy-lit-top:#223c7a;--anatomy-lit-shade:#172954;
+  --anatomy-hi:#eef1f8;--anatomy-mid:#727b94;--anatomy-lo:#454c60;--anatomy-faint:#292d3b;--anatomy-lit:#6c93f8;
+  --anatomy-halo:#040508;--anatomy-dot:#eef1f8;--anatomy-mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  --acc:#3f6ee8;--acc-h:#365fc7;--acc-t:#82a2f8;--acc-ink:#ffffff;--surface:#1c1c1f;--line:rgba(255,255,255,.14);--line-hi:rgba(217,217,217,.24);
+  --f:"Nunito",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --glass-shadow:0 1px 40px rgba(13,137,207,.11) inset,0 4px 18px rgba(8,59,88,.26) inset,0 98px 100px -48px rgba(89,135,174,.09) inset,0 0 11px -4px rgba(255,255,255,.35) inset,0 39px 56px -36px rgba(255,255,255,.12) inset;
+  color-scheme:dark;margin:0;padding:0 16px;background:var(--anatomy-page);color:var(--anatomy-text);font:400 16px/1.6 var(--f);-webkit-font-smoothing:antialiased;overflow-x:clip
+}
+*{box-sizing:border-box}
+.bar{position:fixed;top:0;left:0;right:0;z-index:20;height:76px;border-bottom:1.5px solid var(--line-hi);background:rgba(13,13,16,.76);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.bar-in{max-width:1220px;height:100%;margin:0 auto;display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;border-inline:1.5px solid var(--line-hi)}
+.bar-in > *{display:flex;align-items:center;padding:0 22px;border-right:1.5px solid var(--line-hi);min-width:0}
+.bar-in > :last-child{border-right:0}
+.logo{display:inline-flex;align-items:center;gap:12px;color:#fff;text-decoration:none;font:600 26px/1 var(--f);letter-spacing:-.01em}
+.logo svg{width:44px;height:44px;flex:none}
+.logo sup{font-size:12px;font-weight:600;color:rgba(255,255,255,.75);margin-left:2px;vertical-align:top;position:relative;top:-4px}
+.crumbs{gap:10px;font-size:15px;color:var(--anatomy-muted);overflow:hidden;white-space:nowrap}
+.crumbs a{color:#fff;text-decoration:none;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.08);transition:background .2s}
+.crumbs a:hover{background:rgba(255,255,255,.15)}
+.crumbs .sep{opacity:.35}
+.crumbs .cur{color:var(--anatomy-muted);overflow:hidden;text-overflow:ellipsis}
+.lang{gap:2px;padding-inline:12px!important}
+.lang button{all:unset;cursor:pointer;font:600 12px/1 var(--f);letter-spacing:.06em;padding:9px 10px;border-radius:999px;color:var(--anatomy-muted);transition:background .25s,color .25s}
+.lang button:hover{color:#fff}
+.lang button[aria-pressed="true"]{background:rgba(217,217,217,.16);color:#fff}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 24px;border-radius:999px;font:400 15px/1.2 var(--f);text-decoration:none;border:0;cursor:pointer;transition:background .25s,transform .25s}
+.btn-main{background:var(--acc);color:var(--acc-ink)}
+.btn-main:hover{background:var(--acc-h)}
+.lang button:focus-visible,.btn:focus-visible,.crumbs a:focus-visible,.cta-banner:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+@media (max-width:860px){
+  .bar{height:auto}
+  .bar-in{grid-template-columns:1fr auto;border-inline:0}
+  .bar-in > *{height:58px;padding:0 12px}
+  .crumbs{grid-column:1/-1;grid-row:2;height:44px;border-top:1px solid var(--line);border-right:0}
+  .bar-cta{display:none!important}
+  .lang{border-right:0}
+  .logo{font-size:22px}.logo svg{width:36px;height:36px}
+}
+.page{width:min(1000px,100%);margin:0 auto;padding:118px 0 96px;position:relative}
+@media (max-width:860px){.page{padding-top:132px}}
+body.iso .etl-head{margin:0 0 32px}
+body.iso .etl-kicker{display:inline-flex;align-items:center;padding:7px 14px;margin-bottom:16px;border-radius:999px;background:rgba(217,217,217,.14);color:#fff;font:600 12px/1 var(--f);letter-spacing:.04em;text-transform:none}
+body.iso .etl-head h1{margin:0 0 14px;font:700 clamp(30px,4.5vw,48px)/1.12 var(--f);color:#fff;letter-spacing:-.01em;text-wrap:balance}
+body.iso .etl-head h1::before,body.iso .etl-notes h2::before{content:"/ ";opacity:.5}
+body.iso .etl-head h1::after,body.iso .etl-notes h2::after{content:" /";opacity:.5}
+body.iso .etl-head p{font-size:clamp(16px,1.9vw,18.5px);color:var(--anatomy-text);max-width:64ch}
+body.iso .iso-plate{border-radius:24px;background:#13141a;box-shadow:0 0 0 1px var(--line-hi),var(--glass-shadow);--anatomy-paper:#13141a}
+body.iso .iso-legend{margin-top:16px;padding:14px 20px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--anatomy-text)}
+body.iso .etl-notes{margin-top:56px}
+body.iso .etl-notes h2{margin:0 0 22px;font:700 clamp(24px,3.4vw,36px)/1.15 var(--f);color:#fff}
+body.iso .etl-steps{gap:12px}
+body.iso .etl-steps li{grid-template-columns:42px 1fr;gap:6px 16px;padding:20px 24px;border:1px solid var(--line);border-left:1px solid var(--line);border-radius:20px;background:var(--surface);transition:background .25s,border-color .25s}
+body.iso .etl-steps li:nth-child(even){background:rgba(255,255,255,.03)}
+body.iso .etl-steps li:hover{border-color:rgba(255,255,255,.30)}
+body.iso .etl-steps li.on{background:rgba(63,110,232,.14);border-color:rgba(63,110,232,.65)}
+body.iso .etl-n{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.09);color:#fff;font:700 15px/38px var(--f);text-align:center}
+body.iso .etl-steps li.on .etl-n{background:var(--acc);color:#fff}
+body.iso .etl-t{font:600 19px/1.25 var(--f);color:#fff}
+body.iso .etl-t small{display:inline-block;margin-left:10px;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.10);color:rgba(255,255,255,.82);font:600 11.5px/1 var(--f)}
+body.iso .etl-d{font-size:15px;color:var(--anatomy-text);line-height:1.52}
+body.iso .etl-stats{gap:12px;margin:36px 0 0;background:none;box-shadow:none;overflow:visible}
+body.iso .etl-stats div{padding:20px 20px 18px;border-radius:18px;border:1px solid var(--line);background:var(--surface)}
+body.iso .etl-stats div:nth-child(even){background:rgba(255,255,255,.03)}
+body.iso .etl-stats b{font:800 24px/1.15 var(--f);color:#fff}
+body.iso .etl-stats span{display:block;margin-top:4px;font-size:13.5px;color:var(--anatomy-muted)}
+body.iso .etl-foot{margin:16px 0 0;font-size:13px;color:var(--anatomy-muted)}
+.cta-banner{margin:52px 0 0;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:28px 34px;border-radius:24px;background:var(--acc);color:#fff;text-decoration:none;transition:background .25s}
+.cta-banner:hover{background:var(--acc-h)}
+.cta-banner strong{display:block;font:700 clamp(20px,2.6vw,28px)/1.2 var(--f)}
+.cta-banner i{flex:none;width:42px;height:42px;border-radius:50%;background:#fff;color:#0d0d10;display:grid;place-items:center;font:700 18px/1 var(--f);font-style:normal;transition:transform .25s}
+.cta-banner:hover i{transform:translate(2px,-2px)}
+.foot{margin:0 -16px;padding:0 16px;background:#23232b;border-top:1px solid #4b4b4e;color:#fff}
+.foot-in{max-width:1000px;margin:0 auto;padding:34px 0 38px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px}
+.foot-copy{font-size:14px;color:rgba(255,255,255,.5)}
+.foot-links{display:flex;flex-wrap:wrap;gap:18px;font-size:14.5px}
+.foot-links a{color:rgba(255,255,255,.82);text-decoration:none}
+.foot-links a:hover{color:#fff}
+</style>
+<a class="cta-banner" href="https://t.me/sabrvaxarakat"><strong data-l="cta">Написать в Telegram</strong><i aria-hidden="true">↗</i></a>
 </main>
+<footer class="foot"><div class="foot-in">
+  <a class="logo" href="./" data-back aria-label="Distrib BI"><svg viewBox="0 0 44 44" aria-hidden="true"><defs><linearGradient id="flg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#55555f"/><stop offset="1" stop-color="#1c1c22"/></linearGradient></defs><rect x="1" y="1" width="42" height="42" rx="11" fill="url(#flg)" stroke="rgba(255,255,255,.18)"/><rect x="11" y="23" width="5" height="10" rx="2" fill="#fff"/><rect x="19.5" y="16" width="5" height="17" rx="2" fill="#fff"/><rect x="28" y="10" width="5" height="23" rx="2" fill="#3f6ee8"/></svg><span>Distrib<sup>BI</sup></span></a>
+  <div class="foot-links"><a href="./" data-back data-l="back">← На главную</a><a href="https://t.me/sabrvaxarakat">@sabrvaxarakat</a><a href="tel:+998990008689">+998 99 000-86-89</a></div>
+  <span class="foot-copy">© 2026 Distrib BI</span>
+</div></footer>
 <script type="module">const AZIMUTH = 45;
 const ELEVATION = 30;
 const SHADES = 4;
@@ -1034,7 +1090,7 @@ function applyLang() {
   svg.setAttribute("aria-label", TX.label);
   steps.forEach((li) => li.setAttribute("aria-label", li.dataset.step + TX.stepBtn + ": " + TX.steps[+li.dataset.step - 1][0]));
   document.querySelectorAll("[data-lang]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
-  document.querySelector("[data-back]").href = "./?lang=" + lang;
+  document.querySelectorAll("[data-back]").forEach((a) => { a.href = "./?lang=" + lang; });
   drawn.table = -1; drawn.step = -1; drawn.open = -1;
   draw();
 }
