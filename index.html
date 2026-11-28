@@ -102,6 +102,8 @@ section > h2::after,.about > div:first-child > h2::after{content:" /";opacity:.5
   mask:radial-gradient(closest-side,transparent calc(100% - 40px),#000 calc(100% - 14px),#000 calc(100% - 3px),transparent 100%)}
 .ring::before{background:conic-gradient(from var(--a),#ff5f6d,#ffc371,#47e5bc,#4f7cff,#a557ff,#ff5f6d);opacity:.36;filter:blur(7px) saturate(1.2);animation:spin 8s linear infinite}
 .ring::after{background:conic-gradient(from var(--a),transparent 0 18%,rgba(255,255,255,.9) 26%,transparent 34% 60%,rgba(255,255,255,.55) 68%,transparent 76%);filter:blur(1.2px);animation:spin 11s linear infinite reverse}
+.glcv{position:absolute;inset:0;width:100%;height:100%;display:block}
+.art.gl .ring{display:none}
 .r1{top:calc(48svh - var(--d));transform-origin:50% 100%;animation:wobA 9s ease-in-out infinite alternate}
 .r2{top:calc(48svh + 6px);transform-origin:50% 0;animation:wobB 11s ease-in-out infinite alternate}
 /* the two rings swing in 3D around their touch point, like glass bubbles turning */
@@ -985,5 +987,69 @@ document.querySelectorAll('.lang button').forEach(b=>b.onclick=()=>setLang(b.dat
 const navA=[...nav.querySelectorAll('a')];
 const sio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)navA.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id))}),{rootMargin:'-45% 0px -50% 0px'});
 X.nav.forEach(([h])=>sio.observe(document.querySelector(h)));
+// hero: two glass rings, raymarched in WebGL (refraction + dispersion); CSS rings stay as the fallback
+(function(){
+  const art=document.querySelector('.art'),cv=document.createElement('canvas');
+  const gl=cv.getContext('webgl',{antialias:false,alpha:false,powerPreference:'low-power'});
+  if(!gl)return;
+  const FS=`precision highp float;
+uniform vec2 uRes;uniform float uTime;
+const float R=1.0,T=.09,W=.17,RR=.07;
+float aA,aB;vec3 cA,cB;
+mat2 rot(float a){float c=cos(a),s=sin(a);return mat2(c,-s,s,c);}
+float band(vec3 p){vec2 q=vec2(length(p.xy)-R,p.z);vec2 d=abs(q)-vec2(T,W)+RR;return length(max(d,0.))+min(max(d.x,d.y),0.)-RR;}
+float map(vec3 p){vec3 a=p-cA;a.xz=rot(aA)*a.xz;vec3 b=p-cB;b.xz=rot(aB)*b.xz;return min(band(a),band(b));}
+vec3 nrm(vec3 p){const vec2 e=vec2(.0015,-.0015);return normalize(e.xyy*map(p+e.xyy)+e.yyx*map(p+e.yyx)+e.yxy*map(p+e.yxy)+e.xxx*map(p+e.xxx));}
+vec3 env(vec3 d){
+  vec3 c=vec3(.18)*smoothstep(-.3,1.,d.y);
+  c+=vec3(1.)*smoothstep(.16,0.,abs(d.x-.62))*smoothstep(-.9,.2,d.y)*1.1+vec3(1.)*smoothstep(.03,0.,abs(d.x-.62))*3.;
+  c+=vec3(1.)*smoothstep(.18,0.,abs(d.x+.70))*smoothstep(-.8,.3,d.y)*.9+vec3(1.)*smoothstep(.035,0.,abs(d.x+.70))*2.4;
+  c+=vec3(1.)*smoothstep(.04,0.,abs(d.y-.55))*smoothstep(.3,-.6,d.z)*2.2;
+  c+=vec3(1.)*smoothstep(.85,.98,d.y)*2.2;
+  c+=vec3(1.)*pow(max(dot(d,normalize(vec3(-.5,.6,-.6))),0.),30.)*5.;
+  c+=.4*(.5+.5*cos(6.2832*(d.x*.9-d.y*.6+vec3(0.,.33,.67))))*smoothstep(.25,.9,abs(d.x)+.3*d.y);
+  return c;}
+vec3 outEnv(vec3 ri,vec3 n,float e){vec3 o=refract(ri,n,e);if(dot(o,o)<.01)o=reflect(ri,n);return env(o);}
+void main(){
+  float s=min(uRes.y,uRes.x*1.25);
+  vec2 uv=(gl_FragCoord.xy-.5*uRes)/s;uv.y-=.02;
+  aA=.42*uTime+1.1;aB=-.33*uTime+2.6;cA=vec3(0.,R+T,0.);cB=-cA;
+  vec3 ro=vec3(0.,0.,-6.),rd=normalize(vec3(uv*.29,1.)),bg=vec3(.051,.051,.063);
+  float t0=1e9,t1=-1.;
+  for(int k=0;k<2;k++){vec3 oc=ro-(k==0?cA:cB);float b=dot(oc,rd),h=b*b-dot(oc,oc)+1.25;if(h>0.){h=sqrt(h);t0=min(t0,-b-h);t1=max(t1,-b+h);}}
+  if(t1<0.){gl_FragColor=vec4(bg,1.);return;}
+  float t=max(t0,0.);bool hit=false;
+  for(int i=0;i<96;i++){float d=map(ro+rd*t);if(d<.0008){hit=true;break;}t+=d;if(t>t1)break;}
+  if(!hit){gl_FragColor=vec4(bg,1.);return;}
+  vec3 p=ro+rd*t,n=nrm(p);
+  float F=.04+.96*pow(1.-max(dot(-rd,n),0.),5.);
+  vec3 ri=refract(rd,n,1./1.5),q=p-n*.004;float ti=0.;
+  for(int i=0;i<64;i++){float d=-map(q+ri*ti);if(d<.0008)break;ti+=max(d,.004);}
+  vec3 ni=-nrm(q+ri*ti);
+  vec3 tr=vec3(outEnv(ri,ni,1.45).r,outEnv(ri,ni,1.5).g,outEnv(ri,ni,1.56).b);
+  vec3 c=mix(tr,env(reflect(rd,n)),F);
+  c=1.-exp(-c*1.7);
+  gl_FragColor=vec4(c+bg*(1.-c),1.);
+}`;
+  try{
+    const sh=(type,src)=>{const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw new Error(gl.getShaderInfoLog(s));return s};
+    const pr=gl.createProgram();
+    gl.attachShader(pr,sh(gl.VERTEX_SHADER,'attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}'));
+    gl.attachShader(pr,sh(gl.FRAGMENT_SHADER,FS));
+    gl.bindAttribLocation(pr,0,'p');gl.linkProgram(pr);if(!gl.getProgramParameter(pr,gl.LINK_STATUS))throw new Error(gl.getProgramInfoLog(pr));
+    gl.useProgram(pr);
+    gl.bindBuffer(gl.ARRAY_BUFFER,gl.createBuffer());
+    gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+    gl.enableVertexAttribArray(0);gl.vertexAttribPointer(0,2,gl.FLOAT,false,0,0);
+    const uRes=gl.getUniformLocation(pr,'uRes'),uTime=gl.getUniformLocation(pr,'uTime');
+    // shortcut: renders at ~0.6 of CSS pixels and upscales (soft edges, cheap on laptop GPUs); raise if it looks blurry on big screens
+    const fit=()=>{const k=Math.min(devicePixelRatio,1)*.6;cv.width=Math.max(1,art.clientWidth*k|0);cv.height=Math.max(1,art.clientHeight*k|0);gl.viewport(0,0,cv.width,cv.height);gl.uniform2f(uRes,cv.width,cv.height)};
+    cv.className='glcv';art.prepend(cv);fit();art.classList.add('gl');
+    let vis=true,raf=0;const t0=performance.now();
+    const draw=now=>{raf=0;gl.uniform1f(uTime,still?2:(now-t0)/1000);gl.drawArrays(gl.TRIANGLES,0,3);if(vis&&!still)raf=requestAnimationFrame(draw)};
+    new IntersectionObserver(e=>{vis=e[0].isIntersecting;if(vis&&!raf)raf=requestAnimationFrame(draw)}).observe(art);
+    addEventListener('resize',()=>{fit();if(!raf)raf=requestAnimationFrame(draw)});
+  }catch(e){console.warn('rings: CSS fallback',e);cv.remove();art.classList.remove('gl')}
+})();
 </script>
 </body></html>
